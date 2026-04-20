@@ -27,6 +27,7 @@ export function TextBlock({ block }: Props) {
       <div className="mt-2">
         <CtaLink label={ctaLabel} url={ctaUrl} />
       </div>
+    
     </div>
   )
 }
