@@ -311,7 +311,11 @@ function isSvgFile(file: File): boolean {
 async function optimizeRasterBufferToWebp(
   input: ArrayBuffer | Buffer
 ): Promise<Buffer> {
-  return sharp(Buffer.from(input))
+  const inputBuffer = Buffer.isBuffer(input)
+    ? input
+    : Buffer.from(new Uint8Array(input))
+
+  return sharp(inputBuffer)
     .rotate()
     .resize(MAX_IMAGE_DIMENSION, MAX_IMAGE_DIMENSION, {
       fit: "inside",
