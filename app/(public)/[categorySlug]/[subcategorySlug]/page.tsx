@@ -4,6 +4,7 @@ import { ContentHero } from "@/components/public/content-hero"
 import { ContentBlocksSection } from "@/components/public/content-blocks-section"
 import { PriceListSection } from "@/components/public/price-list-section"
 import { AfterHeroRegion } from "@/components/public/after-hero-region"
+import { ContentContactCtaSection } from "@/components/public/content-contact-cta-section"
 import type { Category, ContentBlock, PriceListItem, Subcategory } from "@/lib/types"
 import type { Metadata } from "next"
 import { buildPriceListSections } from "@/lib/price-list"
@@ -95,6 +96,7 @@ export default async function SubcategoryPage({ params }: Props) {
       <ContentBlocksSection
         blocks={(contentBlocks ?? []) as ContentBlock[]}
       />
+      <ContentContactCtaSection company={company} />
     </>
   )
 }

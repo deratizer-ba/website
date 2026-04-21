@@ -1,13 +1,14 @@
 import type { ReactNode } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react"
+import { Mail, MessageCircle, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   type CompanyPublicInfo,
   withHttps,
 } from "@/lib/company-site-settings"
 import type { PriceListItem } from "@/lib/types"
+import { cn } from "@/lib/utils"
 
 type PriceListSubsection = {
   title: string
@@ -97,14 +98,18 @@ function ContactRow({
   )
 }
 
-export function PriceListContactBanner({ company }: { company: CompanyPublicInfo }) {
-  const addressLine = [company.street, [company.zip, company.city].filter(Boolean).join(" ")]
-    .filter(Boolean)
-    .join(", ")
-  const locationLine = [addressLine, company.country].filter(Boolean).join(" · ")
-
+export function PriceListContactBanner({
+  company,
+  stickySidebar = true,
+}: {
+  company: CompanyPublicInfo
+  /** V cenníku vľavo zostáva pri skrolovaní; v spodnej CTA sekcii vypnúť. */
+  stickySidebar?: boolean
+}) {
   return (
-    <aside className="lg:sticky lg:top-24">
+    <aside
+      className={cn(stickySidebar && "lg:sticky lg:top-24")}
+    >
       <div className="">
         <div className="mb-4">
           <div className="flex items-start gap-3">
@@ -180,8 +185,8 @@ export function PriceListContactBanner({ company }: { company: CompanyPublicInfo
           ) : null}
 
           <Button
-            variant="default"
-            className="bg-brand mt-4"
+            variant="brand"
+            className="mt-4"
             size="lg"
             nativeButton={false}
             render={<Link href="/kontakt" />}

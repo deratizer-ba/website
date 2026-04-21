@@ -5,6 +5,7 @@ import { ContentBlocksSection } from "@/components/public/content-blocks-section
 import { PriceListSection } from "@/components/public/price-list-section"
 import { SubcategoriesGrid } from "@/components/public/subcategories-grid"
 import { AfterHeroRegion } from "@/components/public/after-hero-region"
+import { ContentContactCtaSection } from "@/components/public/content-contact-cta-section"
 import type { Category, ContentBlock, PriceListItem, Subcategory } from "@/lib/types"
 import type { Metadata } from "next"
 import { buildPriceListSections } from "@/lib/price-list"
@@ -83,6 +84,10 @@ export default async function CategoryPage({ params }: Props) {
         title={category.name}
         description={category.description}
       />
+      <SubcategoriesGrid
+        subcategories={subcategories ?? []}
+        categorySlug={categorySlug}
+      />
       {priceListSection ? (
         <PriceListSection
           company={company}
@@ -98,10 +103,7 @@ export default async function CategoryPage({ params }: Props) {
       <ContentBlocksSection
         blocks={(contentBlocks ?? []) as ContentBlock[]}
       />
-      <SubcategoriesGrid
-        subcategories={subcategories ?? []}
-        categorySlug={categorySlug}
-      />
+      <ContentContactCtaSection company={company} />
     </>
   )
 }
