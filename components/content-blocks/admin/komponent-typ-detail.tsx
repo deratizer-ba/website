@@ -21,7 +21,7 @@ export function KomponentTypDetail({ blockType }: Props) {
   return (
     <div className="space-y-8 max-w-4xl">
       <div>
-        <h1 className="text-2xl font-bold">{CONTENT_BLOCK_LABELS[blockType]}</h1>
+        <h1 className="text-2xl font-semibold">{CONTENT_BLOCK_LABELS[blockType]}</h1>
       </div>
 
       <div>

@@ -24,7 +24,7 @@ export function IconHeadingTextBlock({ block }: Props) {
       ) : null}
       <div className="flex flex-col items-start gap-1">
         {heading?.trim() ? (
-          <h3 className="text-2xl font-bold tracking-tight text-foreground">{heading.trim()}</h3>
+          <h3 className="text-2xl font-semibold tracking-tight text-foreground">{heading.trim()}</h3>
         ) : null}
         {content?.trim() ? (
           <p className="text-muted-foreground leading-snug whitespace-pre-wrap">

@@ -109,8 +109,44 @@ export function getGridHasBackground(block: ContentBlock): boolean {
 
 export function gridBackgroundClass(hasBackground: boolean): string {
   return hasBackground
-    ? "rounded-2xl bg-muted/80 p-5 md:p-6"
+    ? "rounded-2xl bg-muted/80 p-5 md:p-12"
     : ""
+}
+
+const GRID_PUBLIC_BG_BASE = "bg-muted/80 p-5 md:p-12"
+
+/**
+ * Verejné pozadie mriežky; dve+ za sebou s pozadím majú spojený vzhľad
+ * (hore / dole / bez zaoblenia v strede reťazca).
+ */
+export function gridPublicBackgroundClass(
+  hasBackground: boolean,
+  previousHadBackground: boolean | null,
+  nextHadBackground: boolean | null
+): string {
+  if (!hasBackground) return ""
+
+  const prev = previousHadBackground === true
+  const next = nextHadBackground === true
+
+  if (prev && next) return GRID_PUBLIC_BG_BASE
+  if (prev) return `${GRID_PUBLIC_BG_BASE} rounded-b-2xl !pt-4`
+  if (next) return `${GRID_PUBLIC_BG_BASE} rounded-t-2xl !pb-4`
+  return `${GRID_PUBLIC_BG_BASE} rounded-2xl`
+}
+
+/**
+ * Verejné mriežky: prvá `mt-24`; dve za sebou s pozadím bez horného odsadenia;
+ * dve za sebou bez pozadia `mt-8`; inak `mt-24`.
+ */
+export function gridPublicTopMarginClass(
+  hasBackground: boolean,
+  previousHadBackground: boolean | null
+): string {
+  if (previousHadBackground === null) return "mt-24"
+  if (hasBackground && previousHadBackground) return ""
+  if (!hasBackground && !previousHadBackground) return "mt-8"
+  return "mt-24"
 }
 
 export function isRootGridBlock(block: ContentBlock): boolean {

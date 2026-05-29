@@ -60,7 +60,7 @@ export function ContentStructureCategoryDetail({ categoryId }: Props) {
       <div className="mb-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold">{cat.name}</h1>
+            <h1 className="text-2xl font-semibold">{cat.name}</h1>
           </div>
           <div className="flex flex-wrap gap-2 shrink-0">
             <Button

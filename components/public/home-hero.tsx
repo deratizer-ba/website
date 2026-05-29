@@ -34,7 +34,7 @@ export function HomeHero({
         <div className="mx-auto w-full max-w-6xl px-4 pt-54 pb-16">
           <div className="grid items-center gap-8 md:gap-10 lg:grid-cols-3 lg:gap-12">
             <div className="order-2 text-center lg:order-2 lg:col-span-2 lg:text-left">
-              <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-3xl md:text-6xl">
+              <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-3xl md:text-6xl">
                 {title}
               </h1>
               <span
@@ -55,7 +55,7 @@ export function HomeHero({
               </span>
 
               {description ? (
-                <p className="mx-auto mt-6 max-w-xl text-2xl font-bold leading-relaxed md:mt-8 lg:mx-0">
+                <p className="mx-auto mt-6 max-w-xl text-2xl font-semibold leading-relaxed md:mt-8 lg:mx-0">
                   {description}
                 </p>
               ) : null}

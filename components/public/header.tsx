@@ -33,11 +33,11 @@ export function Header({ categories }: Props) {
         <div className="flex items-center justify-between h-16 lg:h-18">
           <Link
             href="/"
-            className="flex items-center gap-2.5 text-lg font-bold tracking-tight text-foreground transition-opacity hover:opacity-90"
+            className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-foreground transition-opacity hover:opacity-90"
           >
             <SiteEmblem className="h-9 w-9 lg:h-10 lg:w-10" decorative />
             <span className="flex flex-col gap-0 leading-none">
-              <span className="text-lg font-bold leading-none tracking-tight">
+              <span className="text-lg font-semibold leading-none tracking-tight">
                 Deratizéri
               </span>
               <span className=" text-xs font-medium leading-none tracking-[0.14em]">
@@ -110,7 +110,7 @@ export function Header({ categories }: Props) {
                 )}
               </SheetTrigger>
               <SheetContent side="right" className="w-80">
-                <SheetTitle className="text-lg font-bold px-4 pb-2">
+                <SheetTitle className="text-lg font-semibold px-4 pb-2">
                   Menu
                 </SheetTitle>
                 <nav className="flex flex-col gap-0.5 px-4">

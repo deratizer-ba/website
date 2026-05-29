@@ -68,13 +68,13 @@ export async function Footer({ categories }: Props) {
     "Profesionálne služby deratizácie, dezinfekcie a dezinsekcie pre váš domov aj firmu."
 
   return (
-    <footer className="relative border-t bg-gradient-to-b from-muted/50 to-muted/20">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent" />
+    <footer className="relative border-t bg-muted/20 mt-24">
+      <div className="" />
       <div className="mx-auto w-full max-w-6xl px-4 py-12 lg:py-14">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4 space-y-4 lg:pr-2">
             <div>
-              <h3 className="font-bold text-xl tracking-tight">
+              <h3 className="font-semibold text-xl tracking-tight">
                 {company.displayName}
               </h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">

@@ -13,7 +13,7 @@ export function SubcategoriesGrid({ subcategories, categorySlug }: Props) {
   return (
     <section className="border-border bg-white pb-16 pt-16 text-foreground dark:bg-background">
       <div className="mx-auto w-full max-w-6xl px-4">
-        <h2 className="text-xl font-bold tracking-tight md:text-2xl">
+        <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
           Podkategórie
         </h2>
         <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-5">

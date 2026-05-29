@@ -3,22 +3,33 @@ import { ContentBlockBody } from "@/components/content-blocks/content-block-body
 import {
   getGridHasBackground,
   getGridLayout,
-  gridBackgroundClass,
+  gridPublicBackgroundClass,
+  gridPublicTopMarginClass,
   gridLayoutCellCount,
   publicGridColsClass,
   sortChildBlocks,
 } from "@/lib/content-blocks"
+import { cn } from "@/lib/utils"
 
 type Props = {
   block: ContentBlock
   /** Všetky podbloky tohto gridu (rovnaký `parent_id` ako `block.id`). */
   children: ContentBlock[]
+  /** Pozadie predchádzajúcej koreňovej mriežky; `null` = žiadna predchádzajúca. */
+  previousGridHadBackground?: boolean | null
+  /** Pozadie nasledujúcej koreňovej mriežky; `null` = žiadna nasledujúca. */
+  nextGridHadBackground?: boolean | null
 }
 
 /**
  * Koreňový blok: mriežka buniek, v každej bunke podbloky v plnej šírke bunky.
  */
-export function GridBlock({ block, children }: Props) {
+export function GridBlock({
+  block,
+  children,
+  previousGridHadBackground = null,
+  nextGridHadBackground = null,
+}: Props) {
   const layout = getGridLayout(block)
   if (!layout) return null
   const hasBackground = getGridHasBackground(block)
@@ -34,7 +45,16 @@ export function GridBlock({ block, children }: Props) {
 
   return (
     <div
-      className={`grid w-full gap-6 lg:gap-8 ${publicGridColsClass(layout)} ${gridBackgroundClass(hasBackground)}`}
+      className={cn(
+        "grid w-full gap-6 lg:gap-8",
+        publicGridColsClass(layout),
+        gridPublicBackgroundClass(
+          hasBackground,
+          previousGridHadBackground,
+          nextGridHadBackground
+        ),
+        gridPublicTopMarginClass(hasBackground, previousGridHadBackground)
+      )}
     >
       {Array.from({ length: n }, (_, cellIndex) => (
         <div

@@ -41,7 +41,7 @@ export default async function PriceListPage() {
         <PriceListWithContactGrid company={company}>
           <div className="space-y-10">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">Cenník</h1>
+              <h1 className="text-3xl font-semibold tracking-tight">Cenník</h1>
               <p className="mt-2 text-muted-foreground">
                 Prehľad služieb a cien podľa kategórií a podkategórií.
               </p>

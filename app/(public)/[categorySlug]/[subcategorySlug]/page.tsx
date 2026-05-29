@@ -5,52 +5,34 @@ import { ContentBlocksSection } from "@/components/public/content-blocks-section
 import { PriceListSection } from "@/components/public/price-list-section"
 import { AfterHeroRegion } from "@/components/public/after-hero-region"
 import { ContentContactCtaSection } from "@/components/public/content-contact-cta-section"
+import { JsonLd } from "@/components/public/json-ld"
 import type { Category, ContentBlock, PriceListItem, Subcategory } from "@/lib/types"
 import type { Metadata } from "next"
 import { buildPriceListSections } from "@/lib/price-list"
 import { getCompanyPublicInfoCached } from "@/lib/get-company-settings-cached"
+import { loadSubcategoryPage } from "@/lib/seo/load-subcategory-page"
+import { buildSubcategoryMetadata } from "@/lib/seo/subcategory-metadata"
+import { buildSubcategoryJsonLd } from "@/lib/seo/subcategory-json-ld"
+import { joinWithPipe } from "@/lib/site-config"
 
 type Props = {
   params: Promise<{ categorySlug: string; subcategorySlug: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { subcategorySlug } = await params
-  const supabase = await createClient()
-  const { data: subcategory } = await supabase
-    .from("subcategories")
-    .select("name, description")
-    .eq("slug", subcategorySlug)
-    .single()
-
-  if (!subcategory) return {}
-
-  return {
-    title: `${subcategory.name} | Deratizéri`,
-    description: subcategory.description,
-  }
+  const { categorySlug, subcategorySlug } = await params
+  const page = await loadSubcategoryPage(categorySlug, subcategorySlug)
+  if (!page) return {}
+  return buildSubcategoryMetadata(page)
 }
 
 export default async function SubcategoryPage({ params }: Props) {
   const { categorySlug, subcategorySlug } = await params
+  const page = await loadSubcategoryPage(categorySlug, subcategorySlug)
+  if (!page) notFound()
+
+  const { category, subcategory } = page
   const supabase = await createClient()
-
-  const { data: category } = await supabase
-    .from("categories")
-    .select("*")
-    .eq("slug", categorySlug)
-    .single()
-
-  if (!category) notFound()
-
-  const { data: subcategory } = await supabase
-    .from("subcategories")
-    .select("*")
-    .eq("slug", subcategorySlug)
-    .eq("category_id", category.id)
-    .single()
-
-  if (!subcategory) notFound()
 
   const [{ data: contentBlocks }, { data: allPriceListItems }, company] =
     await Promise.all([
@@ -74,12 +56,27 @@ export default async function SubcategoryPage({ params }: Props) {
     priceListItems
   )[0]
 
+  const heroTitle = joinWithPipe(subcategory.name, category.name)
+  const jsonLd = buildSubcategoryJsonLd({
+    category,
+    subcategory,
+    path: page.path,
+    company,
+    priceListItems,
+  })
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       <ContentHero
         imageUrl={subcategory.cover_image_url}
-        title={subcategory.name}
+        title={heroTitle}
         description={subcategory.description}
+        breadcrumbs={[
+          { label: "Domov", href: "/" },
+          { label: category.name, href: `/${category.slug}` },
+          { label: subcategory.name },
+        ]}
       />
       {priceListSection ? (
         <PriceListSection

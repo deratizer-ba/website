@@ -47,7 +47,7 @@ export function HomeTopCategories({ categories }: Props) {
                   className="group flex items-center gap-3 rounded-lg outline-offset-4 transition-opacity hover:opacity-80"
                 >
                   <CategoryIcon svg={cat.icon_svg} />
-                  <h2 className="text-lg font-bold leading-snug tracking-tight md:text-xl">
+                  <h2 className="text-lg font-semibold leading-snug tracking-tight md:text-xl">
                     {cat.name}
                   </h2>
                 </Link>
@@ -91,7 +91,7 @@ export function HomeTopCategories({ categories }: Props) {
               className="inline-flex items-center gap-3 rounded-lg transition-opacity hover:opacity-80"
             >
               <CategoryIcon svg={fourth.icon_svg} />
-              <h2 className="text-xl font-bold tracking-tight md:text-2xl">
+              <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
                 {fourth.name}
               </h2>
             </Link>

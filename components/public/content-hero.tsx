@@ -1,16 +1,21 @@
 import Image from "next/image"
+import {
+  HeroBreadcrumbs,
+  type HeroBreadcrumbItem,
+} from "@/components/public/hero-breadcrumbs"
 
 type Props = {
   title: string
   description?: string | null
   imageUrl?: string | null
+  breadcrumbs?: HeroBreadcrumbItem[]
 }
 
 /**
  * Hero pre stránky kategórie a podkategórie — vlastný layout (nie split ako úvodka).
  * Pozadie = rovnaký obrázok ako v náhľade, rozmazaný + polopriehľadná brand farba.
  */
-export function ContentHero({ title, description, imageUrl }: Props) {
+export function ContentHero({ title, description, imageUrl, breadcrumbs }: Props) {
   const customSrc = imageUrl?.trim()
   const src = (customSrc || "/roach.png").trim()
   const resolvedAlt = customSrc ? "" : "Ilustrácia deratizácie"
@@ -43,8 +48,9 @@ export function ContentHero({ title, description, imageUrl }: Props) {
         </div>
 
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:gap-12">
-          <div className="min-w-0 flex-1 border-l-4 border-white pl-5 md:pl-6">
-            <h1 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl lg:leading-tight">
+          <div className="min-w-0 flex-1 border-white">
+            {breadcrumbs?.length ? <HeroBreadcrumbs items={breadcrumbs} /> : null}
+            <h1 className="text-3xl font-semibold tracking-tight text-white md:text-4xl lg:text-5xl lg:leading-tight">
               {title}
             </h1>
             {description ? (

@@ -36,7 +36,7 @@ export function AdminSidebar() {
   return (
     <aside className="w-64 border-r bg-card min-h-screen flex flex-col">
       <div className="p-6 border-b">
-        <Link href="/admin" className="text-xl font-bold">
+        <Link href="/admin" className="text-xl font-semibold">
           Admin
         </Link>
       </div>

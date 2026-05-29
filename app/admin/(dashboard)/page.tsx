@@ -44,7 +44,7 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Prehľad</h1>
+      <h1 className="text-2xl font-semibold mb-6">Prehľad</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
         {stats.map((stat) => (
           <Card key={stat.label}>
@@ -55,7 +55,7 @@ export default async function AdminDashboard() {
               <stat.icon className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">{stat.count}</div>
+              <div className="text-3xl font-semibold">{stat.count}</div>
             </CardContent>
           </Card>
         ))}

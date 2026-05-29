@@ -1,6 +1,7 @@
 import type { ContentBlock } from "@/lib/types"
 import { GridBlock } from "@/components/content-blocks/block-types/grid-block"
 import {
+  getGridHasBackground,
   groupChildBlocksByParent,
   isRootGridBlock,
 } from "@/lib/content-blocks"
@@ -26,18 +27,36 @@ export function ContentBlocksSection({ blocks, compactSpacing = false }: Props) 
     <section
       className={cn(
         "mx-auto w-full max-w-6xl px-4",
-        compactSpacing ? "py-6 md:py-8" : "py-12 md:py-16"
+        compactSpacing ? "" : ""
       )}
     >
-      <div className="flex flex-col gap-6 lg:gap-8">
-        {sortedRoots.map((grid) => (
-          <div key={grid.id} className="w-full">
-            <GridBlock
-              block={grid}
-              children={byParent.get(grid.id) ?? []}
-            />
-          </div>
-        ))}
+      <div className="flex flex-col">
+        {sortedRoots.map((grid, index) => {
+          const previousGrid =
+            index > 0 ? sortedRoots[index - 1] : undefined
+          const nextGrid =
+            index < sortedRoots.length - 1
+              ? sortedRoots[index + 1]
+              : undefined
+          return (
+            <div key={grid.id} className="w-full">
+              <GridBlock
+                block={grid}
+                children={byParent.get(grid.id) ?? []}
+                previousGridHadBackground={
+                  previousGrid !== undefined
+                    ? getGridHasBackground(previousGrid)
+                    : null
+                }
+                nextGridHadBackground={
+                  nextGrid !== undefined
+                    ? getGridHasBackground(nextGrid)
+                    : null
+                }
+              />
+            </div>
+          )
+        })}
       </div>
     </section>
   )

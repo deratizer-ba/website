@@ -25,7 +25,7 @@ function PriceListRows({ items }: { items: PriceListItem[] }) {
   if (items.length === 0) return null
 
   return (
-    <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
+    <div className="overflow-hidden rounded-2xl border bg-card p-4">
       {items.map((item, index) => (
         <div
           key={item.id}
@@ -230,7 +230,7 @@ export function PriceListContent({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
       </div>
 
       <div className="space-y-6">

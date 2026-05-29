@@ -27,7 +27,7 @@ export default async function AdminReusableSectionDetailPage({ params }: Props) 
         </Button>
       </Link>
       <div>
-        <h1 className="text-2xl font-bold">{section.name}</h1>
+        <h1 className="text-2xl font-semibold">{section.name}</h1>
         {section.description ? (
           <p className="text-muted-foreground mt-1">{section.description}</p>
         ) : null}

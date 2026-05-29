@@ -94,7 +94,7 @@ export function ContentStructureSubcategoryDetail({
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p className="text-sm text-muted-foreground mb-1">{cat.name}</p>
-            <h1 className="text-2xl font-bold">{valid.name}</h1>
+            <h1 className="text-2xl font-semibold">{valid.name}</h1>
             {valid.description ? (
               <p className="text-muted-foreground mt-3 max-w-2xl">
                 {valid.description}

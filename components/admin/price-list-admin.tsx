@@ -480,7 +480,7 @@ export function PriceListAdmin() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Cenník</h1>
+        <h1 className="text-2xl font-semibold">Cenník</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Kategórie a podkategórie sú prevzaté z existujúceho obsahu. Riadky môžete
           pridávať priamo na stránke, upravovať ceruzkou a meniť poradie myšou.

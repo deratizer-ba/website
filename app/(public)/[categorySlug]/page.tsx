@@ -6,10 +6,14 @@ import { PriceListSection } from "@/components/public/price-list-section"
 import { SubcategoriesGrid } from "@/components/public/subcategories-grid"
 import { AfterHeroRegion } from "@/components/public/after-hero-region"
 import { ContentContactCtaSection } from "@/components/public/content-contact-cta-section"
+import { JsonLd } from "@/components/public/json-ld"
 import type { Category, ContentBlock, PriceListItem, Subcategory } from "@/lib/types"
 import type { Metadata } from "next"
 import { buildPriceListSections } from "@/lib/price-list"
 import { getCompanyPublicInfoCached } from "@/lib/get-company-settings-cached"
+import { loadCategoryPage } from "@/lib/seo/load-category-page"
+import { buildCategoryMetadata } from "@/lib/seo/category-metadata"
+import { buildCategoryJsonLd } from "@/lib/seo/category-json-ld"
 
 type Props = {
   params: Promise<{ categorySlug: string }>
@@ -17,32 +21,18 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { categorySlug } = await params
-  const supabase = await createClient()
-  const { data: category } = await supabase
-    .from("categories")
-    .select("name, description")
-    .eq("slug", categorySlug)
-    .single()
-
-  if (!category) return {}
-
-  return {
-    title: `${category.name} | Deratizéri`,
-    description: category.description,
-  }
+  const page = await loadCategoryPage(categorySlug)
+  if (!page) return {}
+  return buildCategoryMetadata(page)
 }
 
 export default async function CategoryPage({ params }: Props) {
   const { categorySlug } = await params
+  const page = await loadCategoryPage(categorySlug)
+  if (!page) notFound()
+
+  const { category } = page
   const supabase = await createClient()
-
-  const { data: category } = await supabase
-    .from("categories")
-    .select("*")
-    .eq("slug", categorySlug)
-    .single()
-
-  if (!category) notFound()
 
   const { data: subcategories } = await supabase
     .from("subcategories")
@@ -77,12 +67,24 @@ export default async function CategoryPage({ params }: Props) {
     (priceListItems ?? []) as PriceListItem[]
   )[0]
 
+  const jsonLd = buildCategoryJsonLd({
+    category,
+    path: page.path,
+    company,
+    priceListItems,
+  })
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       <ContentHero
         imageUrl={category.cover_image_url}
         title={category.name}
         description={category.description}
+        breadcrumbs={[
+          { label: "Domov", href: "/" },
+          { label: category.name },
+        ]}
       />
       <SubcategoriesGrid
         subcategories={subcategories ?? []}
