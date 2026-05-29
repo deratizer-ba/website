@@ -136,17 +136,17 @@ export function gridPublicBackgroundClass(
 }
 
 /**
- * Verejné mriežky: prvá `mt-24`; dve za sebou s pozadím bez horného odsadenia;
- * dve za sebou bez pozadia `mt-8`; inak `mt-24`.
+ * Verejné mriežky: prvá `mt-18`; dve za sebou s pozadím bez horného odsadenia;
+ * dve za sebou bez pozadia `mt-8`; inak `mt-18`.
  */
 export function gridPublicTopMarginClass(
   hasBackground: boolean,
   previousHadBackground: boolean | null
 ): string {
-  if (previousHadBackground === null) return "mt-24"
+  if (previousHadBackground === null) return "mt-18"
   if (hasBackground && previousHadBackground) return ""
   if (!hasBackground && !previousHadBackground) return "mt-8"
-  return "mt-24"
+  return "mt-18"
 }
 
 export function isRootGridBlock(block: ContentBlock): boolean {
