@@ -3,8 +3,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
 import { ArrowLeft } from "lucide-react"
+import { JsonLd } from "@/components/public/json-ld"
 import type { BlogPost, BlogImage } from "@/lib/types"
 import type { Metadata } from "next"
+import { getCompanyPublicInfoCached } from "@/lib/get-company-settings-cached"
+import { buildBlogPostJsonLd } from "@/lib/seo/blog-post-json-ld"
+import { buildBlogPostMetadata } from "@/lib/seo/blog-post-metadata"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -15,33 +19,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const supabase = await createClient()
   const { data: post } = await supabase
     .from("blog_posts")
-    .select("title, content")
+    .select("title, slug, content, cover_image_url")
     .eq("slug", slug)
     .eq("published", true)
     .single()
 
   if (!post) return {}
 
-  return {
-    title: `${post.title} | Blog | Deratizéri`,
-    description: post.content?.substring(0, 160),
-  }
+  return buildBlogPostMetadata({ post })
 }
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const supabase = await createClient()
 
-  const { data: post } = await supabase
-    .from("blog_posts")
-    .select("*, blog_images(*)")
-    .eq("slug", slug)
-    .eq("published", true)
-    .single()
+  const [{ data: post }, company] = await Promise.all([
+    supabase
+      .from("blog_posts")
+      .select("*, blog_images(*)")
+      .eq("slug", slug)
+      .eq("published", true)
+      .single(),
+    getCompanyPublicInfoCached(),
+  ])
 
   if (!post) notFound()
 
   const typedPost = post as BlogPost & { blog_images: BlogImage[] }
+  const jsonLd = buildBlogPostJsonLd({ post: typedPost, company })
 
   const youtubeEmbedUrl = typedPost.youtube_url
     ? getYoutubeEmbedUrl(typedPost.youtube_url)
@@ -49,6 +54,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <div className="pt-28 lg:pt-32 pb-8 bg-muted/30 border-b">
         <div className="container mx-auto px-4 max-w-4xl">
           <Link
