@@ -49,7 +49,7 @@ export function KomponentTypDetail({ blockType }: Props) {
         <p className="text-xs text-muted-foreground mb-3">
           V bunke gridu — podblok vždy na celú šírku bunky.
         </p>
-        <div className="rounded-xl border-2 border-dashed border-muted-foreground/25 bg-muted/20 overflow-hidden">
+        <div className="rounded-xl border-2 border-dashed border-muted-foreground/25 bg-muted overflow-hidden">
           <div className="container mx-auto px-4 py-10">
             <div className="max-w-3xl mx-auto rounded-lg border bg-card p-6 lg:p-8 shadow-sm">
               <ContentBlockBody block={sample} />

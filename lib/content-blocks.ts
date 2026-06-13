@@ -109,11 +109,11 @@ export function getGridHasBackground(block: ContentBlock): boolean {
 
 export function gridBackgroundClass(hasBackground: boolean): string {
   return hasBackground
-    ? "rounded-2xl bg-muted/80 p-5 md:p-12"
+    ? "rounded-2xl bg-muted p-5 md:p-12"
     : ""
 }
 
-const GRID_PUBLIC_BG_BASE = "bg-muted/80 p-5 md:p-12"
+const GRID_PUBLIC_BG_BASE = "bg-muted p-5 md:p-12"
 
 /**
  * Verejné pozadie mriežky; dve+ za sebou s pozadím majú spojený vzhľad

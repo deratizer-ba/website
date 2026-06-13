@@ -4,11 +4,21 @@ import type { Category } from "@/lib/types"
 import { getCompanyPublicInfoCached } from "@/lib/get-company-settings-cached"
 import { withHttps } from "@/lib/company-site-settings"
 import { Separator } from "@/components/ui/separator"
+import { SiteEmblem } from "@/components/public/site-emblem"
+import { FooterDisinfectionSection } from "@/components/public/footer-disinfection-section"
 import { cn } from "@/lib/utils"
 
 type Props = {
   categories: Category[]
 }
+
+const iconCircleClass =
+  "mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-300 shadow-sm group-hover:border-zinc-500"
+
+const socialIconClass = cn(
+  "inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900",
+  "text-zinc-400 shadow-sm transition-colors"
+)
 
 function FacebookGlyph({ className }: { className?: string }) {
   return (
@@ -45,8 +55,8 @@ function InstagramGlyph({ className }: { className?: string }) {
 function DetailLine({ label, value }: { label: string; value: string }) {
   if (!value) return null
   return (
-    <p className="text-xs text-muted-foreground">
-      <span className="font-medium text-foreground/80">{label}:</span>{" "}
+    <p className="text-xs text-zinc-400">
+      <span className="font-medium text-zinc-300">{label}:</span>{" "}
       <span className="break-words">{value}</span>
     </p>
   )
@@ -68,28 +78,36 @@ export async function Footer({ categories }: Props) {
     "Profesionálne služby deratizácie, dezinfekcie a dezinsekcie pre váš domov aj firmu."
 
   return (
-    <footer className="relative border-t bg-muted/20 mt-24">
-      <div className="" />
-      <div className="mx-auto w-full max-w-6xl px-4 py-12 lg:py-14">
+    <footer className="relative mt-24 border-t border-zinc-800 bg-zinc-950 text-zinc-400">
+      <div className="mx-auto w-full max-w-6xl px-4 py-22 lg:py-34">
+        <FooterDisinfectionSection />
+
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4 space-y-4 lg:pr-2">
             <div>
-              <h3 className="font-semibold text-xl tracking-tight">
+              <Link
+                href="/"
+                aria-label="Domov"
+                className="mb-3 inline-block transition-opacity hover:opacity-90"
+              >
+                <SiteEmblem className="h-10 w-10" decorative />
+              </Link>
+              <h3 className="font-semibold text-xl tracking-tight text-white">
                 {company.displayName}
               </h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
                 {company.tagline || defaultTagline}
               </p>
             </div>
 
             {(hasAddress || hasIds) && (
               <>
-                <Separator className="bg-border/80" />
+                <Separator className="bg-zinc-800" />
                 <div>
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                  <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
                     Fakturačné údaje
                   </h4>
-                  <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="space-y-2 text-sm text-zinc-400">
                     {hasAddress && (
                       <address className="not-italic leading-relaxed space-y-0.5">
                         {company.street ? <p>{company.street}</p> : null}
@@ -110,7 +128,7 @@ export async function Footer({ categories }: Props) {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
               Služby
             </h4>
             <ul className="space-y-2.5">
@@ -118,7 +136,7 @@ export async function Footer({ categories }: Props) {
                 <li key={cat.id}>
                   <Link
                     href={`/${cat.slug}`}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-sm text-zinc-400 transition-colors hover:text-white"
                   >
                     {cat.name}
                   </Link>
@@ -128,14 +146,14 @@ export async function Footer({ categories }: Props) {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
               Navigácia
             </h4>
             <ul className="space-y-2.5">
               <li>
                 <Link
                   href="/"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-zinc-400 transition-colors hover:text-white"
                 >
                   Úvod
                 </Link>
@@ -143,7 +161,7 @@ export async function Footer({ categories }: Props) {
               <li>
                 <Link
                   href="/blog"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-zinc-400 transition-colors hover:text-white"
                 >
                   Blog
                 </Link>
@@ -151,7 +169,7 @@ export async function Footer({ categories }: Props) {
               <li>
                 <Link
                   href="/kontakt"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-zinc-400 transition-colors hover:text-white"
                 >
                   Kontakt
                 </Link>
@@ -159,7 +177,7 @@ export async function Footer({ categories }: Props) {
               <li>
                 <Link
                   href="/admin/login"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm text-zinc-400 transition-colors hover:text-white"
                 >
                   Administrátor
                 </Link>
@@ -168,7 +186,7 @@ export async function Footer({ categories }: Props) {
           </div>
 
           <div className="sm:col-span-2 lg:col-span-4 lg:pl-2">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
               Kontakt
             </h4>
             {hasContactBlock ? (
@@ -176,9 +194,9 @@ export async function Footer({ categories }: Props) {
                 {company.phone ? (
                   <a
                     href={`tel:${company.phone.replace(/\s+/g, "")}`}
-                    className="flex items-start gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+                    className="group flex items-start gap-3 text-sm text-zinc-400 transition-colors hover:text-white"
                   >
-                    <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border bg-background shadow-sm group-hover:border-primary/30">
+                    <span className={iconCircleClass}>
                       <Phone className="h-4 w-4" aria-hidden />
                     </span>
                     <span className="leading-snug pt-1.5">{company.phone}</span>
@@ -187,9 +205,9 @@ export async function Footer({ categories }: Props) {
                 {company.email ? (
                   <a
                     href={`mailto:${company.email}`}
-                    className="flex items-start gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+                    className="group flex items-start gap-3 text-sm text-zinc-400 transition-colors hover:text-white"
                   >
-                    <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border bg-background shadow-sm group-hover:border-primary/30">
+                    <span className={iconCircleClass}>
                       <Mail className="h-4 w-4" aria-hidden />
                     </span>
                     <span className="leading-snug pt-1.5 break-all">
@@ -205,9 +223,8 @@ export async function Footer({ categories }: Props) {
                         target="_blank"
                         rel="noopener noreferrer"
                         className={cn(
-                          "inline-flex h-10 w-10 items-center justify-center rounded-full border bg-background",
-                          "text-muted-foreground shadow-sm transition-colors",
-                          "hover:text-[#1877F2] hover:border-[#1877F2]/40"
+                          socialIconClass,
+                          "hover:border-[#1877F2]/40 hover:text-[#1877F2]"
                         )}
                         aria-label="Facebook"
                       >
@@ -220,9 +237,8 @@ export async function Footer({ categories }: Props) {
                         target="_blank"
                         rel="noopener noreferrer"
                         className={cn(
-                          "inline-flex h-10 w-10 items-center justify-center rounded-full border bg-background",
-                          "text-muted-foreground shadow-sm transition-colors",
-                          "hover:text-pink-600 hover:border-pink-500/35"
+                          socialIconClass,
+                          "hover:border-pink-500/35 hover:text-pink-600"
                         )}
                         aria-label="Instagram"
                       >
@@ -233,14 +249,14 @@ export async function Footer({ categories }: Props) {
                 )}
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-zinc-400">
                 Údaje doplníte v administrácii v sekcii Firemné údaje.
               </p>
             )}
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t pt-8 text-center text-sm text-muted-foreground sm:flex-row sm:text-left">
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-zinc-800 pt-8 text-center text-sm text-zinc-500 sm:flex-row sm:text-left">
           <p>
             &copy; {new Date().getFullYear()} {company.displayName}. Všetky
             práva vyhradené.
