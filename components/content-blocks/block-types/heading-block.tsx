@@ -1,10 +1,8 @@
-import type { ContentBlock } from "@/lib/types"
 import { getHeadingData } from "@/lib/content-blocks"
 import { CtaLink } from "./cta-link"
+import type { ContentBlockComponentProps } from "./registry"
 
-type Props = {
-  block: ContentBlock
-}
+type Props = ContentBlockComponentProps
 
 /**
  * Verejný náhľad / telo bloku typu `heading`.

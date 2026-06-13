@@ -3,6 +3,7 @@ import { ContentBlockBody } from "@/components/content-blocks/content-block-body
 import {
   getGridHasBackground,
   getGridLayout,
+  gridCompactContentClass,
   gridPublicBackgroundClass,
   gridPublicTopMarginClass,
   gridLayoutCellCount,
@@ -46,8 +47,10 @@ export function GridBlock({
   return (
     <div
       className={cn(
-        "grid w-full gap-6 lg:gap-8",
+        "grid w-full",
+        layout === "3x3" ? "gap-3 md:gap-6" : "gap-6 lg:gap-8",
         publicGridColsClass(layout),
+        gridCompactContentClass(layout),
         gridPublicBackgroundClass(
           hasBackground,
           previousGridHadBackground,
@@ -59,11 +62,14 @@ export function GridBlock({
       {Array.from({ length: n }, (_, cellIndex) => (
         <div
           key={cellIndex}
-          className="min-w-0 flex flex-col gap-6"
+          className={cn(
+            "min-w-0 flex flex-col",
+            layout === "3x3" ? "gap-3 md:gap-6" : "gap-6"
+          )}
         >
           {byCell.get(cellIndex)?.map((sub) => (
             <div key={sub.id} className="min-w-0 w-full">
-              <ContentBlockBody block={sub} />
+              <ContentBlockBody block={sub} gridLayout={layout} />
             </div>
           ))}
         </div>

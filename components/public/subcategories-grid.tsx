@@ -29,8 +29,9 @@ export function SubcategoriesGrid({ subcategories, categorySlug }: Props) {
                       src={sub.cover_image_url}
                       alt=""
                       fill
-                      className="object-contain transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                      quality={100}
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 640px"
                     />
                   ) : (
                     <div

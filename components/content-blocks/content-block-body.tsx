@@ -1,8 +1,9 @@
-import type { ContentBlock, SubBlockType } from "@/lib/types"
+import type { ContentBlock, GridLayoutId, SubBlockType } from "@/lib/types"
 import { contentBlockComponents } from "./block-types/registry"
 
 type Props = {
   block: ContentBlock
+  gridLayout?: GridLayoutId | null
 }
 
 function isSubBlockType(t: string): t is SubBlockType {
@@ -17,8 +18,8 @@ function isSubBlockType(t: string): t is SubBlockType {
 }
 
 /** Podblok v bunke gridu (`heading` / `text_block`). */
-export function ContentBlockBody({ block }: Props) {
+export function ContentBlockBody({ block, gridLayout = null }: Props) {
   if (!isSubBlockType(block.block_type)) return null
   const Cmp = contentBlockComponents[block.block_type]
-  return <Cmp block={block} />
+  return <Cmp block={block} gridLayout={gridLayout} />
 }

@@ -94,8 +94,8 @@ export default async function SubcategoryPage({ params }: Props) {
       <ContentBlocksSection
         blocks={(contentBlocks ?? []) as ContentBlock[]}
       />
-      <SnipframeSection />
       <ContentContactCtaSection company={company} />
+      <SnipframeSection />
     </>
   )
 }

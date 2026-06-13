@@ -41,7 +41,8 @@ export function ContentHero({ title, description, imageUrl, breadcrumbs }: Props
             src={src}
             alt={resolvedAlt}
             fill
-            className="object-contain object-center"
+            quality={100}
+            className="object-cover object-center"
             priority
             sizes="(max-width: 1024px) 100vw, 640px"
           />
@@ -65,9 +66,10 @@ export function ContentHero({ title, description, imageUrl, breadcrumbs }: Props
               src={src}
               alt={resolvedAlt}
               fill
-              className="object-contain object-center"
+              quality={100}
+              className="object-cover object-center"
               priority
-              sizes="208px"
+              sizes="640px"
             />
           </div>
         </div>

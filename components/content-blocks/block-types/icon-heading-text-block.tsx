@@ -1,14 +1,12 @@
-import Image from "next/image"
-import type { ContentBlock } from "@/lib/types"
 import { cn } from "@/lib/utils"
 import { getIconHeadingTextData } from "@/lib/content-blocks"
+import { BlockMedia } from "./block-media"
 import { CtaLink } from "./cta-link"
+import type { ContentBlockComponentProps } from "./registry"
 
-type Props = {
-  block: ContentBlock
-}
+type Props = ContentBlockComponentProps
 
-export function IconHeadingTextBlock({ block }: Props) {
+export function IconHeadingTextBlock({ block, gridLayout = null }: Props) {
   const { iconUrl, iconSize, heading, content, ctaLabel, ctaUrl } = getIconHeadingTextData(block)
   const size = iconSize && iconSize > 0 ? iconSize : 50
   const hasCta = Boolean(ctaLabel?.trim() || ctaUrl?.trim())
@@ -18,9 +16,12 @@ export function IconHeadingTextBlock({ block }: Props) {
   return (
     <div className="flex flex-col items-start gap-2">
       {iconUrl?.trim() ? (
-        <div className={cn("relative aspect-square", size > 100 && "mx-auto")} style={{ width: size }}>
-          <Image src={iconUrl.trim()} alt="" fill className="object-contain" />
-        </div>
+        <BlockMedia
+          src={iconUrl.trim()}
+          width={size}
+          naturalHeight={gridLayout === "3x3"}
+          wrapperClassName={cn(size > 100 && "mx-auto")}
+        />
       ) : null}
       <div className="flex flex-col items-start gap-1">
         {heading?.trim() ? (

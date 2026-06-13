@@ -30,6 +30,7 @@ import {
 import { ImageUpload } from "@/components/admin/image-upload"
 import { BlockTypeRadioPicker } from "@/components/admin/content-structure/block-type-radio-picker"
 import { ContentBlockBody } from "@/components/content-blocks/content-block-body"
+import { cn } from "@/lib/utils"
 import type { ContentBlock, GridLayoutId, SubBlockType } from "@/lib/types"
 import {
   CONTENT_BLOCK_LABELS,
@@ -40,6 +41,7 @@ import {
   getGridHasBackground,
   getGridLayout,
   gridBackgroundClass,
+  gridCompactContentClass,
   getHeadingData,
   getHeadingTextImageRightData,
   getIconHeadingTextData,
@@ -311,7 +313,12 @@ export function ReusableSectionEditor({ sectionId }: Props) {
             </div>
 
             <div
-              className={`grid gap-4 ${gridBackgroundClass(getGridHasBackground(grid))} ${layout ? adminEditorGridColsClass(layout) : "grid-cols-1"}`}
+              className={cn(
+                "grid gap-4",
+                gridBackgroundClass(getGridHasBackground(grid)),
+                layout ? adminEditorGridColsClass(layout) : "grid-cols-1",
+                layout ? gridCompactContentClass(layout) : ""
+              )}
             >
               {Array.from({ length: n }, (_, cellIndex) => {
                 const cellBlocks = byCell.get(cellIndex) ?? []
@@ -382,7 +389,7 @@ export function ReusableSectionEditor({ sectionId }: Props) {
                             }}>
                               <Pencil className="h-4 w-4" />
                             </Button>
-                            <ContentBlockBody block={sub} />
+                            <ContentBlockBody block={sub} gridLayout={layout} />
                           </div>
                         ))}
                         <Button type="button" variant="ghost" onClick={() => {

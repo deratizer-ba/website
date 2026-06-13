@@ -29,7 +29,7 @@ export default async function HomePage() {
   return (
     <>
       <HomeHero
-        title={h1 || "Profesionálna deratizácia"}
+        title={h1 || "Profesionálne DDD služby pre váš domov aj firmu"}
         description={description}
         imageUrl={coverImage || null}
         topCategories={typedCategories}

@@ -106,8 +106,8 @@ export default async function CategoryPage({ params }: Props) {
       <ContentBlocksSection
         blocks={(contentBlocks ?? []) as ContentBlock[]}
       />
-      <SnipframeSection />
       <ContentContactCtaSection company={company} />
+      <SnipframeSection />
     </>
   )
 }

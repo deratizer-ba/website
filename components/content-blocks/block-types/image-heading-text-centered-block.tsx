@@ -1,13 +1,11 @@
-import Image from "next/image"
-import type { ContentBlock } from "@/lib/types"
 import { getImageHeadingTextCenteredData } from "@/lib/content-blocks"
+import { BlockMedia } from "./block-media"
 import { CtaLink } from "./cta-link"
+import type { ContentBlockComponentProps } from "./registry"
 
-type Props = {
-  block: ContentBlock
-}
+type Props = ContentBlockComponentProps
 
-export function ImageHeadingTextCenteredBlock({ block }: Props) {
+export function ImageHeadingTextCenteredBlock({ block, gridLayout = null }: Props) {
   const { imageUrl, imageSize, heading, content, ctaLabel, ctaUrl } =
     getImageHeadingTextCenteredData(block)
   const size = imageSize && imageSize > 0 ? imageSize : 100
@@ -18,9 +16,11 @@ export function ImageHeadingTextCenteredBlock({ block }: Props) {
   return (
     <div className="flex flex-col items-center text-center gap-2">
       {imageUrl?.trim() ? (
-        <div className="relative aspect-square" style={{ width: size }}>
-          <Image src={imageUrl.trim()} alt="" fill className="object-contain" />
-        </div>
+        <BlockMedia
+          src={imageUrl.trim()}
+          width={size}
+          naturalHeight={gridLayout === "3x3"}
+        />
       ) : null}
       <div className="flex flex-col items-center gap-1">
         {heading?.trim() ? (

@@ -63,7 +63,7 @@ export function publicGridColsClass(layout: GridLayoutId): string {
     case "2x2":
       return "grid-cols-2"
     case "3x3":
-      return "grid-cols-3"
+      return "grid-cols-1 md:grid-cols-3"
     default: {
       const _e: never = layout
       return _e
@@ -85,12 +85,24 @@ export function adminEditorGridColsClass(layout: GridLayoutId): string {
     case "2x2":
       return "grid-cols-2"
     case "3x3":
-      return "grid-cols-3"
+      return "grid-cols-1 sm:grid-cols-3"
     default: {
       const _e: never = layout
       return _e
     }
   }
+}
+
+/** Menšie písmo a medzery pre hustú mriežku 3×3. */
+export function gridCompactContentClass(layout: GridLayoutId): string {
+  if (layout !== "3x3") return ""
+  return [
+    "gap-3 md:gap-6",
+    "[&_h2]:!text-lg [&_h2]:md:!text-xl",
+    "[&_h3]:!text-sm [&_h3]:md:!text-base",
+    "[&_p]:!text-xs [&_p]:md:!text-sm",
+    "[&_.flex-col.gap-2]:!gap-0",
+  ].join(" ")
 }
 
 export function getGridLayout(block: ContentBlock): GridLayoutId | null {

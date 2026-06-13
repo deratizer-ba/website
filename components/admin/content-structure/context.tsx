@@ -809,7 +809,7 @@ export function ContentStructureProvider({ children }: { children: ReactNode }) 
               value={catCover}
               onChange={setCatCover}
               label="Cover"
-              removeBackground
+              allowRemoveBackgroundToggle
             />
             <div className="space-y-2">
               <Label>Ikona (SVG kód)</Label>
@@ -870,7 +870,7 @@ export function ContentStructureProvider({ children }: { children: ReactNode }) 
               value={subCover}
               onChange={setSubCover}
               label="Cover"
-              removeBackground
+              allowRemoveBackgroundToggle
             />
             <Button
               onClick={saveSubcategory}

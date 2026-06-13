@@ -31,6 +31,7 @@ import {
   getGridHasBackground,
   getGridLayout,
   gridBackgroundClass,
+  gridCompactContentClass,
   gridLayoutCellCount,
   groupChildBlocksByParent,
   isRootGridBlock,
@@ -155,7 +156,8 @@ function SortableGridRow({
             className={cn(
               "grid gap-4 p-3 pt-0",
               gridBackgroundClass(hasBackground),
-              adminEditorGridColsClass(layout)
+              adminEditorGridColsClass(layout),
+              gridCompactContentClass(layout)
             )}
           >
             {Array.from({ length: n }, (_, cellIndex) => {
@@ -191,8 +193,13 @@ function SortableGridRow({
                           >
                             <Pencil className="h-4 w-4" />
                           </Button>
-                          <div className="text-sm min-w-0 [overflow-wrap:anywhere] pr-1">
-                            <ContentBlockBody block={sub} />
+                          <div
+                            className={cn(
+                              "min-w-0 [overflow-wrap:anywhere] pr-1",
+                              layout === "3x3" ? "text-xs" : "text-sm"
+                            )}
+                          >
+                            <ContentBlockBody block={sub} gridLayout={layout} />
                           </div>
                         </div>
                       ))}

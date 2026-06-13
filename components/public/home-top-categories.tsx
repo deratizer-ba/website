@@ -20,9 +20,131 @@ function CategoryIcon({ svg }: { svg: string | null }) {
   )
 }
 
+function CategoryHeader({ cat }: { cat: Cat }) {
+  return (
+    <Link
+      href={`/${cat.slug}`}
+      className="group inline-flex items-center gap-3 rounded-lg outline-offset-4 transition-opacity hover:opacity-80"
+    >
+      <CategoryIcon svg={cat.icon_svg} />
+      <h2 className="text-lg font-semibold leading-snug tracking-tight md:text-xl">
+        {cat.name}
+      </h2>
+    </Link>
+  )
+}
+
 function sortSubs(cat: Cat) {
   return [...(cat.subcategories ?? [])].sort(
     (a, b) => a.display_order - b.display_order
+  )
+}
+
+function SubcategoryCard({
+  cat,
+  sub,
+  sizes,
+}: {
+  cat: Cat
+  sub: Subcategory
+  sizes: string
+}) {
+  return (
+    <li>
+      <Link
+        href={`/${cat.slug}/${sub.slug}`}
+        className="group block overflow-hidden rounded-xl border-2 border-border bg-background transition-colors hover:border-brand/40"
+      >
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          {sub.cover_image_url ? (
+            <Image
+              src={sub.cover_image_url}
+              alt=""
+              fill
+              quality={100}
+              className="object-contain object-center p-2 transition-transform duration-300 group-hover:scale-105"
+              sizes={sizes}
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-gradient-to-br from-muted to-muted-foreground/20"
+              aria-hidden
+            />
+          )}
+        </div>
+        <p className="px-1.5 py-2 text-left text-xs font-semibold leading-snug text-foreground">
+          {sub.name}
+        </p>
+      </Link>
+    </li>
+  )
+}
+
+function SubcategoryOverlayCard({
+  cat,
+  sub,
+  sizes,
+}: {
+  cat: Cat
+  sub: Subcategory
+  sizes: string
+}) {
+  return (
+    <li>
+      <Link
+        href={`/${cat.slug}/${sub.slug}`}
+        className="group block overflow-hidden rounded-xl border border-border bg-background transition-colors hover:border-brand/40 hover:bg-muted/40"
+      >
+        <div className="relative aspect-[2/3] w-full overflow-hidden bg-muted">
+          {sub.cover_image_url ? (
+            <Image
+              src={sub.cover_image_url}
+              alt=""
+              fill
+              quality={100}
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes={sizes}
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-gradient-to-br from-muted to-muted-foreground/20"
+              aria-hidden
+            />
+          )}
+          <div
+            className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-3 pb-4 pt-16"
+            aria-hidden
+          />
+          <p className="absolute inset-x-0 bottom-0 px-3 pb-4 text-left text-base font-semibold leading-snug text-white drop-shadow-sm md:text-lg">
+            {sub.name}
+          </p>
+        </div>
+      </Link>
+    </li>
+  )
+}
+
+function SubcategoryGrid({
+  cat,
+  subs,
+  gridClassName,
+  sizes,
+  gapClassName = "gap-4 lg:gap-4",
+}: {
+  cat: Cat
+  subs: Subcategory[]
+  gridClassName: string
+  sizes: string
+  gapClassName?: string
+}) {
+  if (subs.length === 0) return null
+
+  return (
+    <ul className={`mt-5 grid ${gapClassName} ${gridClassName}`}>
+      {subs.map((sub) => (
+        <SubcategoryCard key={sub.id} cat={cat} sub={sub} sizes={sizes} />
+      ))}
+    </ul>
   )
 }
 
@@ -34,54 +156,25 @@ export function HomeTopCategories({ categories }: Props) {
   const fourthSubs = fourth ? sortSubs(fourth) : []
 
   return (
-    <section className="border-border bg-white pb-16 text-foreground dark:bg-background">
+    <section className="border-border bg-muted pt-12 pb-16 text-foreground md:pt-16 dark:bg-background">
       <div className="mx-auto w-full max-w-6xl px-4">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {firstThree.map((cat) => {
-            const subs = sortSubs(cat)
-
-            return (
-              <div key={cat.id} className="min-w-0">
-                <Link
-                  href={`/${cat.slug}`}
-                  className="group flex items-center gap-3 rounded-lg outline-offset-4 transition-opacity hover:opacity-80"
-                >
-                  <CategoryIcon svg={cat.icon_svg} />
-                  <h2 className="text-lg font-semibold leading-snug tracking-tight md:text-xl">
-                    {cat.name}
-                  </h2>
-                </Link>
-
-                {subs.length > 0 ? (
-                  <ul className="mt-5 space-y-1 border-t border-border pt-5">
-                    {subs.map((sub) => (
-                      <li key={sub.id}>
-                        <Link
-                          href={`/${cat.slug}/${sub.slug}`}
-                          className="flex items-center gap-3 rounded-lg py-1.5 px-1.5 transition-colors hover:bg-muted"
-                        >
-                          <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-md bg-muted ring-1 ring-border">
-                            {sub.cover_image_url ? (
-                              <Image
-                                src={sub.cover_image_url}
-                                alt=""
-                                fill
-                                className="object-cover"
-                                sizes="36px"
-                              />
-                            ) : null}
-                          </div>
-                          <span className="text-sm font-medium leading-snug text-foreground">
-                            {sub.name}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </div>
-            )
-          })}
+          {firstThree.map((cat, index) => (
+            <div key={cat.id} className="min-w-0">
+              <CategoryHeader cat={cat} />
+              <SubcategoryGrid
+                cat={cat}
+                subs={sortSubs(cat)}
+                gridClassName={index === 0 ? "grid-cols-3" : "grid-cols-2"}
+                gapClassName={index === 0 ? "gap-3 lg:gap-2.5" : undefined}
+                sizes={
+                  index === 0
+                    ? "(max-width: 640px) 33vw, (max-width: 1024px) 28vw, 640px"
+                    : "(max-width: 640px) 50vw, (max-width: 1024px) 28vw, 640px"
+                }
+              />
+            </div>
+          ))}
         </div>
 
         {fourth ? (
@@ -99,60 +192,38 @@ export function HomeTopCategories({ categories }: Props) {
             {fourthSubs.length > 0 ? (
               <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-5">
                 {fourthSubs.map((sub) => (
-                  <li key={sub.id}>
-                    <Link
-                      href={`/${fourth.slug}/${sub.slug}`}
-                      className="group block overflow-hidden rounded-xl border border-border bg-background transition-colors hover:border-brand/40 hover:bg-muted/40"
-                    >
-                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-                        {sub.cover_image_url ? (
-                          <Image
-                            src={sub.cover_image_url}
-                            alt=""
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                          />
-                        ) : (
-                          <div
-                            className="absolute inset-0 bg-gradient-to-br from-muted to-muted-foreground/20"
-                            aria-hidden
-                          />
-                        )}
-                      </div>
-                      <p className="px-2 py-3 text-center text-sm font-semibold leading-snug text-foreground">
-                        {sub.name}
-                      </p>
-                    </Link>
-                  </li>
+                  <SubcategoryOverlayCard
+                    key={sub.id}
+                    cat={fourth}
+                    sub={sub}
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 640px"
+                  />
                 ))}
               </ul>
-            ) : (
+            ) : fourth.cover_image_url ? (
               <Link
                 href={`/${fourth.slug}`}
-                className="mt-6 block max-w-xs overflow-hidden rounded-xl border border-border bg-background transition-colors hover:border-brand/40"
+                className="mt-6 block max-w-xs overflow-hidden rounded-xl border border-border transition-colors hover:border-brand/40"
               >
-                <div className="relative aspect-[4/3] w-full bg-muted">
-                  {fourth.cover_image_url ? (
-                    <Image
-                      src={fourth.cover_image_url}
-                      alt=""
-                      fill
-                      className="object-cover"
-                      sizes="320px"
-                    />
-                  ) : (
-                    <div
-                      className="absolute inset-0 bg-gradient-to-br from-muted to-muted-foreground/20"
-                      aria-hidden
-                    />
-                  )}
+                <div className="relative aspect-[2/3] w-full overflow-hidden bg-muted">
+                  <Image
+                    src={fourth.cover_image_url}
+                    alt=""
+                    fill
+                    quality={100}
+                    className="object-cover"
+                    sizes="640px"
+                  />
+                  <div
+                    className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-4 pb-4 pt-16"
+                    aria-hidden
+                  />
+                  <p className="absolute inset-x-0 bottom-0 px-4 pb-4 text-left text-base font-semibold text-white drop-shadow-sm md:text-lg">
+                    {fourth.name}
+                  </p>
                 </div>
-                <p className="px-3 py-3 text-center text-sm font-semibold">
-                  {fourth.name}
-                </p>
               </Link>
-            )}
+            ) : null}
           </div>
         ) : null}
       </div>

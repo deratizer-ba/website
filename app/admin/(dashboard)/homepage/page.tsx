@@ -100,7 +100,6 @@ export default function HomepageAdmin() {
           value={coverImage}
           onChange={setCoverImage}
           label="Cover obrázok"
-          removeBackground
         />
       </div>
     </div>

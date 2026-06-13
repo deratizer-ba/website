@@ -8,7 +8,7 @@ type Props = {
   title: string
   description?: string | null
   imageUrl?: string | null
-  /** Prvé štyri kategórie: prvé tri v stĺpcoch, štvrtá pod nimi v širšom grid-e. */
+  /** Prvé tri kategórie v 3 stĺpcoch; podkategórie 3/2/2 grid, štvrtá sekcia pod nimi. */
   topCategories?: TopCategory[]
 }
 
@@ -23,18 +23,30 @@ export function HomeHero({
   const customSrc = imageUrl?.trim()
   const defaultImageSrc = "/roach.png"
   const src = (customSrc || defaultImageSrc).trim()
-  const hasImage = Boolean(src)
-  const imageAlt = ""
-  const defaultImageAlt = "Ilustrácia deratizácie"
-  const resolvedAlt = customSrc ? imageAlt : defaultImageAlt
 
   return (
     <>
-      <section className="flex w-full">
-        <div className="mx-auto w-full max-w-6xl px-4 pt-54 pb-16">
+      <section className="relative flex min-h-[75vh] w-full overflow-hidden">
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <Image
+            src={src}
+            alt=""
+            fill
+            priority
+            quality={100}
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/30"
+          aria-hidden
+        />
+
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pt-54 pb-16">
           <div className="grid items-center gap-8 md:gap-10 lg:grid-cols-3 lg:gap-12">
             <div className="order-2 text-center lg:order-2 lg:col-span-2 lg:text-left">
-              <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-3xl md:text-6xl">
+              <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-3xl md:text-6xl">
                 {title}
               </h1>
               <span
@@ -55,7 +67,7 @@ export function HomeHero({
               </span>
 
               {description ? (
-                <p className="mx-auto mt-6 max-w-xl text-2xl font-semibold leading-relaxed md:mt-8 lg:mx-0">
+                <p className="mx-auto mt-6 max-w-xl text-2xl font-semibold leading-relaxed text-white/90 md:mt-8 lg:mx-0">
                   {description}
                 </p>
               ) : null}

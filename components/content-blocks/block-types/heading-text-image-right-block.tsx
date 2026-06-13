@@ -1,13 +1,11 @@
-import Image from "next/image"
-import type { ContentBlock } from "@/lib/types"
 import { getHeadingTextImageRightData } from "@/lib/content-blocks"
+import { BlockMedia } from "./block-media"
 import { CtaLink } from "./cta-link"
+import type { ContentBlockComponentProps } from "./registry"
 
-type Props = {
-  block: ContentBlock
-}
+type Props = ContentBlockComponentProps
 
-export function HeadingTextImageRightBlock({ block }: Props) {
+export function HeadingTextImageRightBlock({ block, gridLayout = null }: Props) {
   const { heading, content, imageUrl, imageSize, ctaLabel, ctaUrl } = getHeadingTextImageRightData(block)
   const size = imageSize && imageSize > 0 ? imageSize : 70
   const hasCta = Boolean(ctaLabel?.trim() || ctaUrl?.trim())
@@ -29,9 +27,11 @@ export function HeadingTextImageRightBlock({ block }: Props) {
       <CtaLink label={ctaLabel} url={ctaUrl} />
       {imageUrl?.trim() ? (
         <div className="flex justify-end pt-1">
-          <div className="relative aspect-square" style={{ width: size }}>
-            <Image src={imageUrl.trim()} alt="" fill className="object-contain" />
-          </div>
+          <BlockMedia
+            src={imageUrl.trim()}
+            width={size}
+            naturalHeight={gridLayout === "3x3"}
+          />
         </div>
       ) : null}
     </div>
