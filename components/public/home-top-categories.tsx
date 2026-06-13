@@ -165,12 +165,14 @@ export function HomeTopCategories({ categories }: Props) {
               <SubcategoryGrid
                 cat={cat}
                 subs={sortSubs(cat)}
-                gridClassName={index === 0 ? "grid-cols-3" : "grid-cols-2"}
+                gridClassName={
+                  index === 0 ? "grid-cols-3" : "grid-cols-3 sm:grid-cols-2"
+                }
                 gapClassName={index === 0 ? "gap-3 lg:gap-2.5" : undefined}
                 sizes={
                   index === 0
                     ? "(max-width: 640px) 33vw, (max-width: 1024px) 28vw, 640px"
-                    : "(max-width: 640px) 50vw, (max-width: 1024px) 28vw, 640px"
+                    : "(max-width: 640px) 33vw, (max-width: 1024px) 28vw, 640px"
                 }
               />
             </div>
@@ -190,13 +192,13 @@ export function HomeTopCategories({ categories }: Props) {
             </Link>
 
             {fourthSubs.length > 0 ? (
-              <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-5">
+              <ul className="mt-6 grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-5">
                 {fourthSubs.map((sub) => (
                   <SubcategoryOverlayCard
                     key={sub.id}
                     cat={fourth}
                     sub={sub}
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 640px"
+                    sizes="(max-width: 640px) 33vw, (max-width: 1024px) 40vw, 640px"
                   />
                 ))}
               </ul>
