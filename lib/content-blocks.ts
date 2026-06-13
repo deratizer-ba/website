@@ -63,7 +63,7 @@ export function publicGridColsClass(layout: GridLayoutId): string {
     case "2x2":
       return "grid-cols-2"
     case "3x3":
-      return "grid-cols-1 md:grid-cols-3"
+      return "grid-cols-2 md:grid-cols-3"
     default: {
       const _e: never = layout
       return _e
@@ -85,7 +85,7 @@ export function adminEditorGridColsClass(layout: GridLayoutId): string {
     case "2x2":
       return "grid-cols-2"
     case "3x3":
-      return "grid-cols-1 sm:grid-cols-3"
+      return "grid-cols-2 sm:grid-cols-3"
     default: {
       const _e: never = layout
       return _e
