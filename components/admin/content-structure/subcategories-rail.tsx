@@ -92,7 +92,7 @@ function SortableSubcategoryItem({
           href={adminSubcategoryPath(categoryId, sub.id)}
           className="flex min-w-0 flex-1 items-center px-2 py-2.5 text-left transition-colors hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
         >
-          <span className="font-semibold leading-tight">{sub.name}</span>
+          <span className="font-normal leading-tight">{sub.name}</span>
         </Link>
       </div>
     </li>
@@ -153,7 +153,7 @@ export function ContentStructureSubcategoriesRail() {
   return (
     <aside className="w-full shrink-0 border-b bg-card lg:w-56 lg:border-b-0 lg:border-r flex flex-col max-h-[45vh] lg:max-h-none lg:min-h-[calc(100vh-3rem)]">
       <div className="px-3 py-2.5 border-b">
-        <h2 className="text-sm font-semibold text-foreground">Stránky</h2>
+        <h2 className="text-sm font-normal text-foreground">Stránky</h2>
       </div>
 
       <div className="flex-1 overflow-y-auto p-3 space-y-2">
@@ -166,7 +166,7 @@ export function ContentStructureSubcategoriesRail() {
           )}
         >
           <Home className="h-4 w-4 shrink-0 text-muted-foreground" />
-          <span className="font-semibold text-left leading-tight">
+          <span className="font-normal text-left leading-tight">
             Úvodná stránka
           </span>
         </Link>
@@ -213,7 +213,7 @@ export function ContentStructureSubcategoriesRail() {
           )}
         >
           <Plus className="h-4 w-4 shrink-0 text-muted-foreground" />
-          <span className="font-semibold text-sm">Nová podstránka</span>
+          <span className="font-normal text-sm">Nová podstránka</span>
         </button>
       </div>
     </aside>

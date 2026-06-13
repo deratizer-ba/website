@@ -27,7 +27,7 @@ export default async function AdminReusableSectionsPage() {
 
   return (
     <div className="space-y-2">
-      <h1 className="text-2xl font-semibold">Globálne bloky</h1>
+      <h1 className="text-2xl font-normal">Globálne bloky</h1>
       <ReusableSectionsManager
         sections={sections}
         afterHeroItems={afterHeroItems}

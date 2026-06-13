@@ -39,7 +39,7 @@ function PriceListRows({ items }: { items: PriceListItem[] }) {
             {item.name}
           </p>
           {(item.price ?? "").trim() ? (
-            <p className="shrink-0 whitespace-nowrap text-sm font-semibold tabular-nums">
+            <p className="shrink-0 whitespace-nowrap text-sm font-normal tabular-nums">
               {item.price}
             </p>
           ) : null}
@@ -114,7 +114,7 @@ export function PriceListContactBanner({
         <div className="mb-4">
           <div className="flex items-start gap-3">
             <div className="min-w-0">
-              <p className="font-semibold tracking-tight">
+              <p className="font-normal tracking-tight">
                 {company.displayName}
               </p>
               {company.tagline ? (
@@ -230,7 +230,7 @@ export function PriceListContent({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
+        <h2 className="text-2xl font-normal tracking-tight">{title}</h2>
       </div>
 
       <div className="space-y-6">
@@ -239,7 +239,7 @@ export function PriceListContent({
         {subcategories.map((subcategory) =>
           subcategory.items.length > 0 ? (
             <div key={subcategory.title} className="space-y-3">
-              <h3 className="text-lg font-semibold">{subcategory.title}</h3>
+              <h3 className="text-lg font-normal">{subcategory.title}</h3>
               <PriceListRows items={subcategory.items} />
             </div>
           ) : null

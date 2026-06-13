@@ -134,7 +134,7 @@ export function FooterDisinfectionSection() {
     >
       <h2
         id="footer-disinfection-heading"
-        className="max-w-3xl text-2xl font-semibold leading-tight tracking-tight text-white lg:text-3xl"
+        className="max-w-3xl text-2xl font-normal leading-tight tracking-tight text-white lg:text-3xl"
       >
         Naše služby vykonávame u klientov{" "}
         <span className="text-brand">všetkých druhov priestorov</span>

@@ -25,7 +25,7 @@ export default async function BlogPage() {
     <>
       <div className="pt-28 lg:pt-32 pb-12 bg-muted/30 border-b">
         <div className="mx-auto w-full max-w-5xl px-4">
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-normal tracking-tight">
             Blog
           </h1>
           <p className="text-muted-foreground mt-2">
@@ -72,7 +72,7 @@ export default async function BlogPage() {
                       day: "numeric",
                     })}
                   </p>
-                  <h2 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors leading-snug">
+                  <h2 className="font-normal text-lg mb-2 group-hover:text-primary transition-colors leading-snug">
                     {post.title}
                   </h2>
                   {post.content && (

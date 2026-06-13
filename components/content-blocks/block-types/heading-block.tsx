@@ -16,7 +16,7 @@ export function HeadingBlock({ block }: Props) {
   return (
     <div className="space-y-2">
       {t ? (
-        <h2 className="text-4xl font-semibold tracking-tight text-foreground">
+        <h2 className="text-4xl font-normal tracking-tight text-foreground">
           {t}
         </h2>
       ) : null}

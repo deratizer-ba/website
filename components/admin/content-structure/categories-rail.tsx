@@ -76,7 +76,7 @@ function SortableCategoryItem({
           href={adminCategoryPath(cat.id)}
           className="flex min-w-0 flex-1 items-center px-2 py-2.5 text-left transition-colors hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
         >
-          <span className="font-semibold leading-tight">{cat.name}</span>
+          <span className="font-normal leading-tight">{cat.name}</span>
         </Link>
       </div>
     </li>
@@ -116,7 +116,7 @@ export function ContentStructureCategoriesRail() {
   return (
     <aside className="w-full shrink-0 border-b bg-card lg:w-64 lg:border-b-0 lg:border-r flex flex-col max-h-[50vh] lg:max-h-none lg:min-h-[calc(100vh-3rem)]">
       <div className="px-3 py-2.5 border-b">
-        <h2 className="text-sm font-semibold text-foreground">Kategórie</h2>
+        <h2 className="text-sm font-normal text-foreground">Kategórie</h2>
       </div>
 
       <div className="flex-1 overflow-y-auto p-3">
@@ -161,7 +161,7 @@ export function ContentStructureCategoriesRail() {
           )}
         >
           <Plus className="h-4 w-4 shrink-0 text-muted-foreground" />
-          <span className="font-semibold text-sm">Nová kategória</span>
+          <span className="font-normal text-sm">Nová kategória</span>
         </button>
       </div>
     </aside>

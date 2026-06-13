@@ -107,7 +107,7 @@ export default function CompanySettingsAdmin() {
     <div>
       <div className="mb-6">
         <div>
-          <h1 className="text-2xl font-semibold">Firemné údaje</h1>
+          <h1 className="text-2xl font-normal">Firemné údaje</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Zobrazia sa v pätičke webu (kontakt, fakturačné údaje, sociálne
             siete).

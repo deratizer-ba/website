@@ -21,7 +21,7 @@ export function KomponentTypDetail({ blockType }: Props) {
   return (
     <div className="space-y-8 max-w-4xl">
       <div>
-        <h1 className="text-2xl font-semibold">{CONTENT_BLOCK_LABELS[blockType]}</h1>
+        <h1 className="text-2xl font-normal">{CONTENT_BLOCK_LABELS[blockType]}</h1>
       </div>
 
       <div>
@@ -45,7 +45,7 @@ export function KomponentTypDetail({ blockType }: Props) {
       </div>
 
       <div>
-        <h2 className="text-sm font-semibold mb-2">Náhľad ako na webe</h2>
+        <h2 className="text-sm font-normal mb-2">Náhľad ako na webe</h2>
         <p className="text-xs text-muted-foreground mb-3">
           V bunke gridu — podblok vždy na celú šírku bunky.
         </p>

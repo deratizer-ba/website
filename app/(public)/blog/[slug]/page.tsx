@@ -64,7 +64,7 @@ export default async function BlogPostPage({ params }: Props) {
             <ArrowLeft className="h-4 w-4 mr-1" />
             Späť na blog
           </Link>
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-normal tracking-tight">
             {typedPost.title}
           </h1>
           <p className="text-muted-foreground text-sm mt-2">

@@ -71,7 +71,7 @@ export function ReusableSectionsManager({
   return (
     <div className="space-y-8">
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold">Nová reusable sekcia</h2>
+        <h2 className="text-lg font-normal">Nová reusable sekcia</h2>
         <div className="space-y-2 max-w-xl">
           <Label>Názov</Label>
           <Input value={name} onChange={(e) => setName(e.target.value)} />
@@ -90,7 +90,7 @@ export function ReusableSectionsManager({
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold">Region `after_hero`</h2>
+        <h2 className="text-lg font-normal">Region `after_hero`</h2>
         <p className="text-sm text-muted-foreground">
           Zaškrtnuté sekcie sa zobrazia hneď za HERO sekciou na public stránkach.
         </p>
@@ -131,7 +131,7 @@ export function ReusableSectionsManager({
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold">Region `before_footer`</h2>
+        <h2 className="text-lg font-normal">Region `before_footer`</h2>
         <p className="text-sm text-muted-foreground">
           Zaškrtnuté sekcie sa zobrazia pred pätičkou na každej public stránke.
         </p>

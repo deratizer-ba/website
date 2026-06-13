@@ -13,7 +13,7 @@ export function SubcategoriesGrid({ subcategories, categorySlug }: Props) {
   return (
     <section className="border-border bg-white pb-16 pt-16 text-foreground dark:bg-background">
       <div className="mx-auto w-full max-w-6xl px-4">
-        <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+        <h2 className="text-xl font-normal tracking-tight md:text-2xl">
           Podkategórie
         </h2>
         <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-5">
@@ -40,7 +40,7 @@ export function SubcategoriesGrid({ subcategories, categorySlug }: Props) {
                     />
                   )}
                 </div>
-                <p className="px-2 py-3 text-center text-sm font-semibold leading-snug text-foreground">
+                <p className="px-2 py-3 text-center text-sm font-normal leading-snug text-foreground">
                   {sub.name}
                 </p>
               </Link>

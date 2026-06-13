@@ -204,7 +204,7 @@ function SortablePriceListRow({
               <p className="truncate font-medium">{item.name}</p>
             </div>
             {item.price?.trim() ? (
-              <p className="shrink-0 font-semibold whitespace-nowrap">{item.price}</p>
+              <p className="shrink-0 font-normal whitespace-nowrap">{item.price}</p>
             ) : null}
             <div className="flex shrink-0 items-center gap-1">
               <Button
@@ -286,7 +286,7 @@ function PriceListScopeEditor({
   return (
     <div className="rounded-2xl border bg-card shadow-sm">
       <div className="border-b px-5 py-4">
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <h3 className="text-lg font-normal">{title}</h3>
         {subtitle ? (
           <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
         ) : null}
@@ -480,7 +480,7 @@ export function PriceListAdmin() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold">Cenník</h1>
+        <h1 className="text-2xl font-normal">Cenník</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Kategórie a podkategórie sú prevzaté z existujúceho obsahu. Riadky môžete
           pridávať priamo na stránke, upravovať ceruzkou a meniť poradie myšou.

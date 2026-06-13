@@ -184,7 +184,7 @@ export function ManagedImagesAdmin() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold">Obrázky</h1>
+        <h1 className="text-2xl font-normal">Obrázky</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Zoznam všetkých miest v admine, kde je aktuálne priradený obrázok.
         </p>

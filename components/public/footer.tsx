@@ -92,7 +92,7 @@ export async function Footer({ categories }: Props) {
               >
                 <SiteEmblem className="h-10 w-10" decorative />
               </Link>
-              <h3 className="font-semibold text-xl tracking-tight text-white">
+              <h3 className="font-normal text-xl tracking-tight text-white">
                 {company.displayName}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-zinc-400">
@@ -104,7 +104,7 @@ export async function Footer({ categories }: Props) {
               <>
                 <Separator className="bg-zinc-800" />
                 <div>
-                  <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                  <h4 className="mb-3 text-xs font-normal uppercase tracking-wider text-zinc-500">
                     Fakturačné údaje
                   </h4>
                   <div className="space-y-2 text-sm text-zinc-400">
@@ -128,7 +128,7 @@ export async function Footer({ categories }: Props) {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            <h4 className="mb-4 text-xs font-normal uppercase tracking-wider text-zinc-500">
               Služby
             </h4>
             <ul className="space-y-2.5">
@@ -146,7 +146,7 @@ export async function Footer({ categories }: Props) {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            <h4 className="mb-4 text-xs font-normal uppercase tracking-wider text-zinc-500">
               Navigácia
             </h4>
             <ul className="space-y-2.5">
@@ -186,7 +186,7 @@ export async function Footer({ categories }: Props) {
           </div>
 
           <div className="sm:col-span-2 lg:col-span-4 lg:pl-2">
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            <h4 className="mb-4 text-xs font-normal uppercase tracking-wider text-zinc-500">
               Kontakt
             </h4>
             {hasContactBlock ? (

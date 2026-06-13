@@ -34,7 +34,7 @@ function BlockTypePreview({ block }: { block: ContentBlock }) {
     const { title, ctaLabel } = getHeadingData(block)
     return (
       <div className="space-y-3">
-        <h3 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h3>
+        <h3 className="text-2xl font-normal tracking-tight text-foreground">{title}</h3>
         <div className="inline-flex h-9 items-center rounded-lg border border-border px-3 text-sm">
           {ctaLabel || "Viac informácií"}
         </div>
@@ -47,7 +47,7 @@ function BlockTypePreview({ block }: { block: ContentBlock }) {
     return (
       <div className="space-y-3">
         {heading ? (
-          <h3 className="text-2xl font-semibold tracking-tight text-foreground">{heading}</h3>
+          <h3 className="text-2xl font-normal tracking-tight text-foreground">{heading}</h3>
         ) : null}
         <p className="text-muted-foreground leading-snug whitespace-pre-wrap">{content}</p>
         <div className="inline-flex h-9 items-center rounded-lg border border-border px-3 text-sm">
@@ -64,7 +64,7 @@ function BlockTypePreview({ block }: { block: ContentBlock }) {
         <PreviewDot className="size-8" />
         <div className="space-y-2">
           {heading ? (
-            <h3 className="text-2xl font-semibold tracking-tight text-foreground">{heading}</h3>
+            <h3 className="text-2xl font-normal tracking-tight text-foreground">{heading}</h3>
           ) : null}
           {content ? (
             <p className="text-muted-foreground leading-snug whitespace-pre-wrap">{content}</p>
@@ -84,7 +84,7 @@ function BlockTypePreview({ block }: { block: ContentBlock }) {
         <PreviewDot />
         <div className="flex flex-col items-center gap-2">
           {heading ? (
-            <h3 className="text-2xl font-semibold tracking-tight text-foreground">{heading}</h3>
+            <h3 className="text-2xl font-normal tracking-tight text-foreground">{heading}</h3>
           ) : null}
           {content ? (
             <p className="text-muted-foreground leading-snug whitespace-pre-wrap">{content}</p>
@@ -103,7 +103,7 @@ function BlockTypePreview({ block }: { block: ContentBlock }) {
       <div className="space-y-3">
         <div className="space-y-2">
           {heading ? (
-            <h3 className="text-2xl font-semibold tracking-tight text-foreground">{heading}</h3>
+            <h3 className="text-2xl font-normal tracking-tight text-foreground">{heading}</h3>
           ) : null}
           {content ? (
             <p className="text-muted-foreground leading-snug whitespace-pre-wrap">{content}</p>
@@ -126,7 +126,7 @@ function BlockTypePreview({ block }: { block: ContentBlock }) {
       <div className="space-y-3">
         <div className="space-y-2">
           {heading ? (
-            <h3 className="text-2xl font-semibold tracking-tight text-foreground">{heading}</h3>
+            <h3 className="text-2xl font-normal tracking-tight text-foreground">{heading}</h3>
           ) : null}
           {content ? (
             <p className="text-muted-foreground leading-snug whitespace-pre-wrap">{content}</p>

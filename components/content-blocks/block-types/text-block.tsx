@@ -14,7 +14,7 @@ export function TextBlock({ block }: Props) {
     <div>
       <div className="space-y-1">
         {heading?.trim() ? (
-          <h2 className="text-4xl font-semibold tracking-tight text-foreground">
+          <h2 className="text-4xl font-normal tracking-tight text-foreground">
             {heading.trim()}
           </h2>
         ) : null}

@@ -27,7 +27,7 @@ function CategoryHeader({ cat }: { cat: Cat }) {
       className="group inline-flex items-center gap-3 rounded-lg outline-offset-4 transition-opacity hover:opacity-80"
     >
       <CategoryIcon svg={cat.icon_svg} />
-      <h2 className="text-lg font-semibold leading-snug tracking-tight md:text-xl">
+      <h2 className="text-lg font-normal leading-snug tracking-tight md:text-xl">
         {cat.name}
       </h2>
     </Link>
@@ -53,7 +53,7 @@ function SubcategoryCard({
     <li>
       <Link
         href={`/${cat.slug}/${sub.slug}`}
-        className="group block overflow-hidden rounded-xl border-2 border-border bg-background transition-colors hover:border-brand/40"
+        className="group block overflow-hidden rounded-xl border-2 border-border bg-background transition-colors hover:border-brand"
       >
         <div className="relative aspect-[4/3] w-full overflow-hidden">
           {sub.cover_image_url ? (
@@ -62,7 +62,7 @@ function SubcategoryCard({
               alt=""
               fill
               quality={100}
-              className="object-contain object-center p-2 transition-transform duration-300 group-hover:scale-105"
+              className="object-contain object-center p-2 transition-transform duration-300"
               sizes={sizes}
             />
           ) : (
@@ -72,7 +72,7 @@ function SubcategoryCard({
             />
           )}
         </div>
-        <p className="px-1.5 py-2 text-left text-xs font-semibold leading-snug text-foreground">
+        <p className="pl-3 pb-2 tex`t-left text-xs font-normal leading-snug text-foreground">
           {sub.name}
         </p>
       </Link>
@@ -93,7 +93,7 @@ function SubcategoryOverlayCard({
     <li>
       <Link
         href={`/${cat.slug}/${sub.slug}`}
-        className="group block overflow-hidden rounded-xl border border-border bg-background transition-colors hover:border-brand/40 hover:bg-muted/40"
+        className="group block overflow-hidden rounded-xl border-2 border-border bg-background transition-colors hover:border-brand"
       >
         <div className="relative aspect-[2/3] w-full overflow-hidden bg-muted">
           {sub.cover_image_url ? (
@@ -102,7 +102,7 @@ function SubcategoryOverlayCard({
               alt=""
               fill
               quality={100}
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-300"
               sizes={sizes}
             />
           ) : (
@@ -115,7 +115,7 @@ function SubcategoryOverlayCard({
             className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-3 pb-4 pt-16"
             aria-hidden
           />
-          <p className="absolute inset-x-0 bottom-0 px-3 pb-4 text-left text-base font-semibold leading-snug text-white drop-shadow-sm md:text-lg">
+          <p className="absolute inset-x-0 bottom-0 px-3 pb-4 text-left text-base font-normal leading-snug text-white drop-shadow-sm md:text-lg">
             {sub.name}
           </p>
         </div>
@@ -186,7 +186,7 @@ export function HomeTopCategories({ categories }: Props) {
               className="inline-flex items-center gap-3 rounded-lg transition-opacity hover:opacity-80"
             >
               <CategoryIcon svg={fourth.icon_svg} />
-              <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+              <h2 className="text-xl font-normal tracking-tight md:text-2xl">
                 {fourth.name}
               </h2>
             </Link>
@@ -220,7 +220,7 @@ export function HomeTopCategories({ categories }: Props) {
                     className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-4 pb-4 pt-16"
                     aria-hidden
                   />
-                  <p className="absolute inset-x-0 bottom-0 px-4 pb-4 text-left text-base font-semibold text-white drop-shadow-sm md:text-lg">
+                  <p className="absolute inset-x-0 bottom-0 px-4 pb-4 text-left text-base font-normal text-white drop-shadow-sm md:text-lg">
                     {fourth.name}
                   </p>
                 </div>

@@ -16,7 +16,7 @@ export function ContentStructureCategoriesList() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold">Štruktúra obsahu</h1>
+      <h1 className="text-2xl font-normal">Štruktúra obsahu</h1>
     </div>
   )
 }

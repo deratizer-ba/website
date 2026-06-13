@@ -51,7 +51,7 @@ export function ContentHero({ title, description, imageUrl, breadcrumbs }: Props
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:gap-12">
           <div className="min-w-0 flex-1 border-white">
             {breadcrumbs?.length ? <HeroBreadcrumbs items={breadcrumbs} /> : null}
-            <h1 className="text-3xl font-semibold tracking-tight text-white md:text-4xl lg:text-5xl lg:leading-tight">
+            <h1 className="text-3xl font-normal tracking-tight text-white md:text-4xl lg:text-5xl lg:leading-tight">
               {title}
             </h1>
             {description ? (
