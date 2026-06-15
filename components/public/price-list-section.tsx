@@ -120,41 +120,20 @@ export function CompanyContactLinks({
       ) : null}
 
       <ContactRow icon={<Mail className="h-4 w-4" aria-hidden />}>
-        {company.email ? (
-          <a
-            href={`mailto:${company.email}`}
-            className="block max-w-[280px] rounded-md outline-none ring-offset-background transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring"
-            aria-label="Otvoriť e-mailový klient"
-          >
-            <span className="relative block h-6 w-[80%]">
-              <Image
-                src="/mailpic.jpg"
-                alt=""
-                fill
-                className="object-contain object-left dark:invert"
-                sizes="280px"
-              />
-            </span>
-            <p className="text-xs font-medium text-foreground">
-              Ochrana proti spamu
-            </p>
-          </a>
-        ) : (
-          <div className="block max-w-[280px]">
-            <span className="relative block h-6 w-[80%]">
-              <Image
-                src="/mailpic.jpg"
-                alt=""
-                fill
-                className="object-contain object-left dark:invert"
-                sizes="280px"
-              />
-            </span>
-            <p className="text-xs font-medium text-foreground">
-              Ochrana proti spamu
-            </p>
-          </div>
-        )}
+        <div className="block max-w-[280px]">
+          <span className="relative block h-6 w-[80%]">
+            <Image
+              src="/mailpic.jpg"
+              alt=""
+              fill
+              className="object-contain object-left dark:invert"
+              sizes="280px"
+            />
+          </span>
+          <p className="text-xs font-medium text-foreground">
+            Ochrana proti spamu
+          </p>
+        </div>
       </ContactRow>
 
       {ig || fb ? (
