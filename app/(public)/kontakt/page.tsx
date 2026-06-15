@@ -1,7 +1,11 @@
 import { AfterHeroRegion } from "@/components/public/after-hero-region"
+import { getCompanyPublicInfoCached } from "@/lib/get-company-settings-cached"
 import { ContactPageForm } from "./contact-page-form"
+import { ContactPageInfo } from "./contact-page-info"
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const company = await getCompanyPublicInfoCached()
+
   return (
     <>
       <div className="border-b bg-muted/30 pb-12 pt-28 lg:pt-32">
@@ -15,7 +19,12 @@ export default function ContactPage() {
         </div>
       </div>
       <AfterHeroRegion />
-      <ContactPageForm />
+      <section className="mx-auto w-full max-w-6xl px-4 py-12">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:items-start">
+          <ContactPageInfo company={company} />
+          <ContactPageForm />
+        </div>
+      </section>
     </>
   )
 }

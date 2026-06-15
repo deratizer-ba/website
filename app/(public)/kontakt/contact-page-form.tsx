@@ -31,9 +31,8 @@ export function ContactPageForm() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-2xl px-4 py-12">
-      <Card>
-        <CardContent className="p-6 md:p-8">
+    <Card>
+      <CardContent className="p-6 md:p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="name" className="flex items-center gap-1.5">
@@ -99,6 +98,5 @@ export function ContactPageForm() {
           </form>
         </CardContent>
       </Card>
-    </section>
   )
 }

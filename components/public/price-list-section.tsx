@@ -90,7 +90,7 @@ function ContactRow({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
         {icon}
       </div>
       <div className="min-w-0 flex-1 text-sm leading-relaxed">{children}</div>
@@ -98,13 +98,106 @@ function ContactRow({
   )
 }
 
+export function CompanyContactLinks({
+  company,
+}: {
+  company: CompanyPublicInfo
+}) {
+  const ig = withHttps(company.instagramUrl)
+  const fb = withHttps(company.facebookUrl)
+
+  return (
+    <div className="space-y-4">
+      {company.phone ? (
+        <ContactRow icon={<Phone className="h-4 w-4" aria-hidden />}>
+          <a
+            href={`tel:${company.phone.replace(/\s/g, "")}`}
+            className="font-medium text-foreground underline-offset-4 hover:underline"
+          >
+            {company.phone}
+          </a>
+        </ContactRow>
+      ) : null}
+
+      <ContactRow icon={<Mail className="h-4 w-4" aria-hidden />}>
+        {company.email ? (
+          <a
+            href={`mailto:${company.email}`}
+            className="block max-w-[280px] rounded-md outline-none ring-offset-background transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label="Otvoriť e-mailový klient"
+          >
+            <span className="relative block h-6 w-[80%]">
+              <Image
+                src="/mailpic.jpg"
+                alt=""
+                fill
+                className="object-contain object-left dark:invert"
+                sizes="280px"
+              />
+            </span>
+            <p className="text-xs font-medium text-foreground">
+              Ochrana proti spamu
+            </p>
+          </a>
+        ) : (
+          <div className="block max-w-[280px]">
+            <span className="relative block h-6 w-[80%]">
+              <Image
+                src="/mailpic.jpg"
+                alt=""
+                fill
+                className="object-contain object-left dark:invert"
+                sizes="280px"
+              />
+            </span>
+            <p className="text-xs font-medium text-foreground">
+              Ochrana proti spamu
+            </p>
+          </div>
+        )}
+      </ContactRow>
+
+      {ig || fb ? (
+        <div className="flex flex-wrap gap-2 pt-1">
+          {ig ? (
+            <a
+              href={ig}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-7 items-center gap-1 px-1 text-[0.8rem] font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <InstagramGlyph className="h-4 w-4 shrink-0" />
+              Instagram
+            </a>
+          ) : null}
+          {fb ? (
+            <a
+              href={fb}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-7 items-center gap-1 px-1 text-[0.8rem] font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <FacebookGlyph className="h-4 w-4 shrink-0" />
+              Facebook
+            </a>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
 export function PriceListContactBanner({
   company,
   stickySidebar = true,
+  showMessageButton = true,
+  children,
 }: {
   company: CompanyPublicInfo
   /** V cenníku vľavo zostáva pri skrolovaní; v spodnej CTA sekcii vypnúť. */
   stickySidebar?: boolean
+  showMessageButton?: boolean
+  children?: ReactNode
 }) {
   return (
     <aside
@@ -124,66 +217,9 @@ export function PriceListContactBanner({
           </div>
         </div>
 
-        <div className="space-y-4">
-          {company.phone ? (
-            <ContactRow icon={<Phone className="h-4 w-4" aria-hidden />}>
-              <a
-                href={`tel:${company.phone.replace(/\s/g, "")}`}
-                className="font-medium text-foreground underline-offset-4 hover:underline"
-              >
-                {company.phone}
-              </a>
-            </ContactRow>
-          ) : null}
+        <CompanyContactLinks company={company} />
 
-          <ContactRow icon={<Mail className="h-4 w-4" aria-hidden />}>
-            <a
-              href={`mailto:${company.email}`}
-              className="block max-w-[280px] rounded-md outline-none ring-offset-background transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring"
-              aria-label="Otvoriť e-mailový klient"
-            >
-              <span className="relative block h-6  w-[80%]">
-                <Image
-                  src="/mailpic.jpg"
-                  alt=""
-                  fill
-                  className="object-contain object-left dark:invert"
-                  sizes="280px"
-                />
-              </span>
-              <p className="text-xs font-medium text-foreground">
-                Ochrana proti spamu
-              </p>
-            </a>
-          </ContactRow>
-
-          {(company.instagramUrl || company.facebookUrl) ? (
-            <div className="flex flex-wrap gap-2 pt-1">
-              {company.instagramUrl ? (
-                <a
-                  href={withHttps(company.instagramUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-7 items-center gap-1 px-1 text-[0.8rem] font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  <InstagramGlyph className="h-4 w-4 shrink-0" />
-                  Instagram
-                </a>
-              ) : null}
-              {company.facebookUrl ? (
-                <a
-                  href={withHttps(company.facebookUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-7 items-center gap-1 px-1 text-[0.8rem] font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  <FacebookGlyph className="h-4 w-4 shrink-0" />
-                  Facebook
-                </a>
-              ) : null}
-            </div>
-          ) : null}
-
+        {showMessageButton ? (
           <Button
             variant="brand"
             className="mt-4"
@@ -194,7 +230,9 @@ export function PriceListContactBanner({
             <MessageCircle className="h-4 w-4" />
             Napísať správu
           </Button>
-        </div>
+        ) : null}
+
+        {children}
       </div>
     </aside>
   )
