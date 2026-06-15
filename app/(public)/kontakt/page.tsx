@@ -8,12 +8,12 @@ export default async function ContactPage() {
 
   return (
     <>
-      <div className="border-b bg-muted/30 pb-12 pt-28 lg:pt-32">
-        <div className="mx-auto w-full max-w-5xl px-4">
+      <div className="border-b bg-brand pb-12 pt-28 lg:pt-32">
+        <div className="mx-auto w-full max-w-6xl px-4 text-white">
           <h1 className="text-3xl font-normal tracking-tight md:text-4xl">
             Kontakt
           </h1>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-2 text-white">
             Máte otázku alebo potrebujete pomoc? Napíšte nám.
           </p>
         </div>

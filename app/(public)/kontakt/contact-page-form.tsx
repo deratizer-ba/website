@@ -31,15 +31,15 @@ export function ContactPageForm() {
   }
 
   return (
-    <Card>
-      <CardContent className="p-6 md:p-8">
+    <Card className="bg-muted border-none py-36 border-0">
+      <CardContent className="mx-auto max-w-lg">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="name" className="flex items-center gap-1.5">
                 <User className="h-3.5 w-3.5 text-muted-foreground" />
                 Meno
               </Label>
-              <Input id="name" name="name" required placeholder="Vaše meno" />
+              <Input id="name" name="name" required placeholder="Vaše meno" className="bg-white text-black" />
             </div>
 
             <div className="space-y-2">
@@ -49,6 +49,7 @@ export function ContactPageForm() {
               </Label>
               <Input
                 id="email"
+                className="bg-white text-black"
                 name="email"
                 type="email"
                 required
@@ -66,6 +67,7 @@ export function ContactPageForm() {
                 name="phone"
                 type="tel"
                 placeholder="+421 xxx xxx xxx"
+                className="bg-white text-black"
               />
             </div>
 
@@ -77,24 +79,26 @@ export function ContactPageForm() {
                 required
                 rows={6}
                 placeholder="Vaša správa..."
+                className="bg-white text-black"
               />
             </div>
-
+            <div className="flex justify-end">
             <Button
               type="submit"
               disabled={loading}
               size="lg"
-              className="w-full"
+              className=""
             >
               {loading ? (
                 "Odosielam..."
               ) : (
                 <>
                   <Send className="mr-2 h-4 w-4" />
-                  Odoslať správu
+                  Odoslať
                 </>
               )}
             </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
