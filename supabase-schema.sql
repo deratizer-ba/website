@@ -142,6 +142,27 @@ create table price_list_items (
 create trigger price_list_items_updated_at before update on price_list_items
   for each row execute function update_updated_at();
 
+-- Contact form submissions
+create table contact_submissions (
+  id uuid default uuid_generate_v4() primary key,
+  name text not null,
+  email text not null,
+  phone text,
+  message text not null,
+  category_id uuid references categories(id) on delete set null,
+  subcategory_id uuid references subcategories(id) on delete set null,
+  category_label text,
+  subcategory_label text,
+  source text not null default 'contact_page',
+  created_at timestamptz default now(),
+  constraint contact_submissions_source_check check (
+    source in ('homepage', 'contact_page')
+  )
+);
+
+create index idx_contact_submissions_created_at on contact_submissions(created_at desc);
+create index idx_contact_submissions_source on contact_submissions(source);
+
 -- ============================================
 -- DEFAULT DATA
 -- ============================================
@@ -176,6 +197,7 @@ alter table content_blocks enable row level security;
 alter table blog_posts enable row level security;
 alter table blog_images enable row level security;
 alter table price_list_items enable row level security;
+alter table contact_submissions enable row level security;
 
 -- Public read access
 create policy "Public read site_settings" on site_settings for select using (true);
@@ -185,6 +207,15 @@ create policy "Public read content_blocks" on content_blocks for select using (t
 create policy "Public read published blog_posts" on blog_posts for select using (published = true);
 create policy "Public read blog_images" on blog_images for select using (true);
 create policy "Public read price_list_items" on price_list_items for select using (true);
+
+create policy "Public insert contact_submissions"
+  on contact_submissions for insert
+  with check (true);
+
+create policy "Admin read contact_submissions"
+  on contact_submissions for select
+  to authenticated
+  using (true);
 
 -- Admin full access (authenticated users)
 create policy "Admin manage site_settings" on site_settings for all to authenticated using (true) with check (true);

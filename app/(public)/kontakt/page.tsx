@@ -1,10 +1,25 @@
 import { AfterHeroRegion } from "@/components/public/after-hero-region"
+import { createClient } from "@/lib/supabase/server"
 import { getCompanyPublicInfoCached } from "@/lib/get-company-settings-cached"
+import type { Category, Subcategory } from "@/lib/types"
 import { ContactPageForm } from "./contact-page-form"
 import { ContactPageInfo } from "./contact-page-info"
 
 export default async function ContactPage() {
-  const company = await getCompanyPublicInfoCached()
+  const supabase = await createClient()
+
+  const [{ data: categories }, company] = await Promise.all([
+    supabase
+      .from("categories")
+      .select("*, subcategories(*)")
+      .order("display_order")
+      .order("display_order", { referencedTable: "subcategories" }),
+    getCompanyPublicInfoCached(),
+  ])
+
+  const typedCategories = (categories ?? []) as (Category & {
+    subcategories: Subcategory[]
+  })[]
 
   return (
     <>
@@ -22,7 +37,7 @@ export default async function ContactPage() {
       <section className="mx-auto w-full max-w-6xl px-4 py-12">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:items-start">
           <ContactPageInfo company={company} />
-          <ContactPageForm />
+          <ContactPageForm categories={typedCategories} />
         </div>
       </section>
     </>

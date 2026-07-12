@@ -2,6 +2,11 @@ import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import { Toaster } from "@/components/ui/sonner"
 import { ThemeProvider } from "@/components/theme-provider"
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoscript,
+} from "@/components/analytics/google-tag-manager"
+import { CookieConsentBar } from "@/components/analytics/cookie-consent-bar"
 import { getSiteName, getSiteUrl } from "@/lib/site-config"
 import "./globals.css"
 
@@ -30,6 +35,8 @@ export default function RootLayout({
   return (
     <html lang="sk" className={geistSans.variable} suppressHydrationWarning>
       <body className="antialiased">
+        <GoogleTagManager />
+        <GoogleTagManagerNoscript />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -38,6 +45,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster />
+          <CookieConsentBar />
         </ThemeProvider>
       </body>
     </html>

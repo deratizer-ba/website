@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { HomeTopCategories } from "@/components/public/home-top-categories"
+import { ContactForm } from "@/components/public/contact-form"
 import type { Category, Subcategory } from "@/lib/types"
 
 type TopCategory = Category & { subcategories: Subcategory[] }
@@ -8,7 +9,6 @@ type Props = {
   title: string
   description?: string | null
   imageUrl?: string | null
-  /** Prvé tri kategórie v 3 stĺpcoch; podkategórie 3/2/2 grid, štvrtá sekcia pod nimi. */
   topCategories?: TopCategory[]
 }
 
@@ -44,8 +44,8 @@ export function HomeHero({
         />
 
         <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pt-54 pb-16">
-          <div className="grid items-center gap-8 md:gap-10 lg:grid-cols-3 lg:gap-12">
-            <div className="order-2 text-center lg:order-2 lg:col-span-2 lg:text-left">
+          <div className="grid items-center gap-8 md:gap-10 lg:grid-cols-2 lg:gap-12">
+            <div className="text-center lg:text-left">
               <h1 className="text-4xl font-normal leading-[1.05] tracking-tight text-white sm:text-3xl md:text-6xl">
                 {title}
               </h1>
@@ -72,9 +72,17 @@ export function HomeHero({
                 </p>
               ) : null}
             </div>
+
+            <ContactForm
+              categories={topCategories ?? []}
+              source="homepage"
+              cardClassName="border-0 bg-white/95 py-6 shadow-lg backdrop-blur-sm dark:bg-background/95"
+              className="max-w-none px-4 sm:px-6"
+            />
           </div>
         </div>
       </section>
+
       {columns.length > 0 ? <HomeTopCategories categories={columns} /> : null}
     </>
   )

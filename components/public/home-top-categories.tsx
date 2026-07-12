@@ -6,6 +6,7 @@ type Cat = Category & { subcategories: Subcategory[] }
 
 type Props = {
   categories: Cat[]
+  variant?: "default" | "hero"
 }
 
 function CategoryIcon({ svg }: { svg: string | null }) {
@@ -20,14 +21,22 @@ function CategoryIcon({ svg }: { svg: string | null }) {
   )
 }
 
-function CategoryHeader({ cat }: { cat: Cat }) {
+function CategoryHeader({
+  cat,
+  hero,
+}: {
+  cat: Cat
+  hero?: boolean
+}) {
   return (
     <Link
       href={`/${cat.slug}`}
       className="group inline-flex items-center gap-3 rounded-lg outline-offset-4 transition-opacity hover:opacity-80"
     >
       <CategoryIcon svg={cat.icon_svg} />
-      <h2 className="text-lg font-normal leading-snug tracking-tight md:text-xl">
+      <h2
+        className={`text-lg font-normal leading-snug tracking-tight md:text-xl ${hero ? "text-white" : ""}`}
+      >
         {cat.name}
       </h2>
     </Link>
@@ -72,7 +81,7 @@ function SubcategoryCard({
             />
           )}
         </div>
-        <p className="pl-3 pb-2 tex`t-left text-xs font-normal leading-snug text-foreground">
+        <p className="pl-3 pb-2 text-left text-xs font-normal leading-snug text-foreground">
           {sub.name}
         </p>
       </Link>
@@ -148,20 +157,36 @@ function SubcategoryGrid({
   )
 }
 
-export function HomeTopCategories({ categories }: Props) {
+export function HomeTopCategories({
+  categories,
+  variant = "default",
+}: Props) {
   if (categories.length === 0) return null
 
+  const hero = variant === "hero"
   const firstThree = categories.slice(0, 3)
   const fourth = categories[3]
   const fourthSubs = fourth ? sortSubs(fourth) : []
 
   return (
-    <section className="border-border bg-muted pt-12 pb-16 text-foreground md:pt-16 dark:bg-background">
-      <div className="mx-auto w-full max-w-6xl px-4">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+    <section
+      className={
+        hero
+          ? "text-foreground"
+          : "border-border bg-muted pt-12 pb-16 text-foreground md:pt-16 dark:bg-background"
+      }
+    >
+      <div className={hero ? "w-full" : "mx-auto w-full max-w-6xl px-4"}>
+        <div
+          className={
+            hero
+              ? "grid grid-cols-1 gap-8"
+              : "grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+          }
+        >
           {firstThree.map((cat, index) => (
             <div key={cat.id} className="min-w-0">
-              <CategoryHeader cat={cat} />
+              <CategoryHeader cat={cat} hero={hero} />
               <SubcategoryGrid
                 cat={cat}
                 subs={sortSubs(cat)}
@@ -180,13 +205,21 @@ export function HomeTopCategories({ categories }: Props) {
         </div>
 
         {fourth ? (
-          <div className="mt-12 border-t border-border pt-10 lg:mt-14 lg:pt-12">
+          <div
+            className={
+              hero
+                ? "mt-8 border-t border-white/20 pt-8"
+                : "mt-12 border-t border-border pt-10 lg:mt-14 lg:pt-12"
+            }
+          >
             <Link
               href={`/${fourth.slug}`}
               className="inline-flex items-center gap-3 rounded-lg transition-opacity hover:opacity-80"
             >
               <CategoryIcon svg={fourth.icon_svg} />
-              <h2 className="text-xl font-normal tracking-tight md:text-2xl">
+              <h2
+                className={`text-xl font-normal tracking-tight md:text-2xl ${hero ? "text-white" : ""}`}
+              >
                 {fourth.name}
               </h2>
             </Link>
