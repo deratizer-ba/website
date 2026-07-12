@@ -26,9 +26,11 @@ export const CONSENT_GRANTED: ConsentState = {
   ad_personalization: "granted",
 }
 
+type DataLayerEntry = Record<string, unknown> | unknown[] | IArguments
+
 declare global {
   interface Window {
-    dataLayer: Record<string, unknown>[]
+    dataLayer: DataLayerEntry[]
     gtag?: (...args: unknown[]) => void
   }
 }
