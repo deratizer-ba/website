@@ -25,8 +25,13 @@ type Props = {
   cardClassName?: string
 }
 
-const selectClassName =
-  "flex h-9 w-full rounded-lg border border-input bg-white px-2.5 py-1 text-sm text-black outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50"
+const fieldClassName =
+  "bg-white text-black placeholder:text-neutral-500 dark:bg-white dark:text-black dark:placeholder:text-neutral-500"
+
+const selectClassName = cn(
+  "flex h-9 w-full rounded-lg border border-input px-2.5 py-1 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50",
+  fieldClassName
+)
 
 export function ContactForm({
   categories = [],
@@ -165,7 +170,7 @@ export function ContactForm({
               name="name"
               required
               placeholder="Vaše meno"
-              className="bg-white text-black"
+              className={fieldClassName}
             />
           </div>
 
@@ -176,7 +181,7 @@ export function ContactForm({
             </Label>
             <Input
               id={`${source}-email`}
-              className="bg-white text-black"
+              className={fieldClassName}
               name="email"
               type="email"
               required
@@ -194,7 +199,7 @@ export function ContactForm({
               name="phone"
               type="tel"
               placeholder="+421 xxx xxx xxx"
-              className="bg-white text-black"
+              className={fieldClassName}
             />
           </div>
 
@@ -206,7 +211,7 @@ export function ContactForm({
               required
               rows={6}
               placeholder="Vaša správa..."
-              className="bg-white text-black"
+              className={fieldClassName}
             />
           </div>
 
